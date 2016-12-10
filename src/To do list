@@ -1,0 +1,44 @@
+//TODO List
+
+Player
+	Powerups
+		Exploding bullets
+		Weapon spread
+		Rate of fire
+		
+		
+	Upgrades
+		Extra Health
+		Damage resistance
+		Rate of fire
+		
+		
+	
+
+Bullets
+	Powerups
+	 	Different weapons types
+	 	Different movement
+	Particles
+	
+	
+
+Enemies
+	Add bullet collision
+	Particle explosion
+	Death animation
+	
+
+
+Levels
+	Scoring based on kills instead of time
+	Waves instead of levels
+	Long thought out levels
+	
+
+
+Controls
+	implement just mouse play. (maybe)
+	
+Options
+	Switch between keyboard+mouse to just mouse (maybe)

@@ -1,6 +1,7 @@
 package com.practice.main.entities.enemies;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -11,12 +12,16 @@ import com.practice.main.Game;
 import com.practice.main.entities.GameObject;
 import com.practice.main.entities.Handler;
 import com.practice.main.entities.ObjectID;
+import com.practice.main.states.GameState;
 
 public class WavingEnemy extends GameObject {
 
 	Handler handler = Game.handler;
 	Rectangle enemy;
+	Random r = new Random();
+	int archSize = 1;
 	
+	float delta = 300;
 	float deltaVelX = 0;
 	boolean negative = false;
 	
@@ -24,19 +29,21 @@ public class WavingEnemy extends GameObject {
 		super(x, y, width, height, id, state);
 		
 		enemy = new Rectangle(x, y, width, height);
+		archSize = r.nextInt(3) + 1;
+		delta += r.nextInt(200);
 		
-		velY = .1f;
+		velY = .075f;
 	}
 
 	@Override
 	public void update() {
-		System.out.println("Velx: " + velX + " deltaVelX: " + deltaVelX);
-		if(Math.abs(deltaVelX) <= 400) {
+		System.out.println("archSize: " + archSize);
+		if(Math.abs(deltaVelX) <= delta) {
 			if(negative) {
-				velX = velX - .001f;
+				velX = velX - .001f * archSize;
 				deltaVelX--;
 			} else {
-				velX = velX + .001f;
+				velX = velX + .001f * archSize;
 				deltaVelX++;
 			}
 		} else {
@@ -60,6 +67,9 @@ public class WavingEnemy extends GameObject {
 			GameObject currentObject = objects.get(i);
 			if(currentObject.getID() == ObjectID.PlayerBullet) {
 				if(currentObject.getShape().intersects(enemy)) {
+					//increase score
+					GameState.SCORE += 100 * GameState.MULTIPLIER;
+					
 					//Add particle explosion
 					
 					//Remove this enemy
@@ -68,6 +78,9 @@ public class WavingEnemy extends GameObject {
 			}
 		}
 		
+		if(y >= 650) {
+			handler.removeObject(this);
+		}
 		
 	}
 

@@ -14,24 +14,45 @@ import com.practice.main.entities.Handler;
 import com.practice.main.entities.ObjectID;
 import com.practice.main.states.GameState;
 
-public class BasicEnemy extends GameObject {
+public class ArchingEnemy extends GameObject {
 
 	Handler handler = Game.handler;
 	Rectangle enemy;
-	
 	Random r = new Random();
+	int archSize = 1;
 	
-	public BasicEnemy(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
+	float deltaVelX = 0;
+	boolean negative = false;
+	
+	public ArchingEnemy(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
 		super(x, y, width, height, id, state);
 		
 		enemy = new Rectangle(x, y, width, height);
+		archSize = r.nextInt(9) + 1;
 		
-		velX = .1f * (r.nextInt(10) - 5);
-		velY = .1f * (r.nextInt(4) + 1);
+		velY = .05f * (r.nextInt(5) + 1);
 	}
 
 	@Override
 	public void update() {
+		if(Math.abs(deltaVelX) <= 1000) {
+			if(negative) {
+				velX = velX - .00007f * archSize;
+				deltaVelX--;
+			} else {
+				velX = velX + .00007f * archSize;
+				deltaVelX++;
+			}
+		} else {
+			negative = !negative;
+			if(deltaVelX < 0) {
+				deltaVelX++;
+			}
+			if(deltaVelX > 0) {
+				deltaVelX--;
+			}
+		}
+		
 		x += velX;
 		y += velY;
 		
@@ -44,7 +65,7 @@ public class BasicEnemy extends GameObject {
 			if(currentObject.getID() == ObjectID.PlayerBullet) {
 				if(currentObject.getShape().intersects(enemy)) {
 					//increase score
-					GameState.SCORE += 50 * GameState.MULTIPLIER;
+					GameState.SCORE += 150 * GameState.MULTIPLIER;
 					
 					//Add particle explosion
 					
@@ -54,20 +75,16 @@ public class BasicEnemy extends GameObject {
 			}
 		}
 		
-		if(x >= 775 || x <= 0) {
-			velX = velX * -1;
+		if(y >= 650) {
+			handler.removeObject(this);
 		}
-		if(y <= 0) {
-			velY = Math.abs(velY);
-		}
-		if(y >= 575) {
-			velY = Math.abs(velY) * -1;
-		}
+		
+		
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.red);
+		g.setColor(Color.blue);
 		g.fillRect(x, y, width, height);
 		
 	}

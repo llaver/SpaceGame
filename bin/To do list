@@ -16,6 +16,10 @@ Player
 	
 
 Bullets
+	Make PlayerBullet an interface
+		Create BasicBullet as subclass of PlayerBullet; Take PlayerBullet's current role
+	Create EnemyBullet interface
+		Create subclasses
 	Powerups
 	 	Different weapons types
 	 	Different movement
@@ -24,21 +28,22 @@ Bullets
 	
 
 Enemies
-	Add bullet collision
 	Particle explosion
 	Death animation
+	New Enemies
+		Firing
+		Homing
+		Jumper
+		
 	
 
 
 Levels
-	Scoring based on kills instead of time
 	Waves instead of levels
 	Long thought out levels
 	
 
 
 Controls
-	implement just mouse play. (maybe)
 	
 Options
-	Switch between keyboard+mouse to just mouse (maybe)

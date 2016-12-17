@@ -12,6 +12,10 @@ public class Player extends GameObject {
 	public Player(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
 		super(x, y, width, height, id, state);
 		
+		velX = .5f;
+		velY = .5f;
+		
+		
 	}
 
 	@Override
@@ -23,7 +27,8 @@ public class Player extends GameObject {
 	public void render(Graphics g) {
 		g.setColor(Color.white);
 		//g.fillRect(x, y, width, height);
-		y = Util.clamp(450, 560, y);
+		y = Util.clamp(100, 550, y);
+		x = Util.clamp(0, 770, x);
 		float[] triangle = {x, y, x + width, y, x + width / 2, y - height};
 		g.fill(new Polygon(triangle));
 		

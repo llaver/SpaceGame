@@ -5,7 +5,8 @@ public enum ObjectID {
 	Player,
 	BasicEnemy,
 	WavingEnemy,
-	PlayerBullet;
+	PlayerBullet, 
+	ArchingEnemy;
 	
 	
 }

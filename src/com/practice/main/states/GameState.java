@@ -26,10 +26,7 @@ public class GameState extends BasicGameState {
 
 	Handler handler = Game.handler;
 	Input input;
-	Player player = new Player(50, 200, 30, 30, ObjectID.Player, this);
 	
-	public static float MAXHEALTH = 100;
-	public static float HEALTH = 100;
 	public static int LIVES = 3;
 	public static int LEVEL = 0;
 	
@@ -37,6 +34,8 @@ public class GameState extends BasicGameState {
 	public static int MULTIPLIER = 0;
 	public static int LEVELTICKER = 0;
 	public static int CURRENCY = 0;
+	
+	Player player = new Player(50, 200, 30, 30, 100, ObjectID.Player, this);
 	
 	private LinkedList<GameObject> objects;
 	
@@ -61,11 +60,12 @@ public class GameState extends BasicGameState {
 		// TODO Auto-generated method stub
 		handler.renderByState(g, this);
 		g.setColor(Color.white);
-		g.drawRect(49, 49, MAXHEALTH + 1, 26);
+		g.drawRect(49, 49, player.getMaxHealth() + 1, 26);
 		g.setColor(Color.red);
-		g.fillRect(50, 50, MAXHEALTH, 25);
+		g.fillRect(50, 50, player.getMaxHealth(), 25);
 		g.setColor(Color.green);
-		g.fillRect(50, 50, HEALTH, 25);
+		g.fillRect(50, 50, player.getHealth(), 25);
+		System.out.println(player.getHealth());
 		
 		g.setColor(Color.white);
 		g.drawString("Score: " + SCORE, 50, 100);
@@ -91,27 +91,12 @@ public class GameState extends BasicGameState {
 			lastLevel += 5000;
 			nextLevel(LEVEL);
 		}
-		System.out.println("");
-		
-		objects = handler.getObjects();
-		
-		for(int i = 0; i < objects.size(); i++) {
-			if(objects.get(i).getID() != ObjectID.Player && objects.get(i).getID() != ObjectID.PlayerBullet) {
-				if(player.getShape().intersects(objects.get(i).getShape())) {
-					HEALTH = HEALTH - .3f;
-					HEALTH = Util.clamp(0, MAXHEALTH, HEALTH);
-				}
-			}
-		}
-		
-		
-		
 		
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
 			game.enterState(2);
 		}
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
-			handler.addObject(new PlayerBullet(player.getX() + 13, Util.clamp(80, 550, player.getY() - 20), 5, 20, ObjectID.PlayerBullet, this));
+			handler.addObject(new PlayerBullet(player.getX() + 13, Util.clamp(80, 550, player.getY() - 20), 5, 20, 0, ObjectID.PlayerBullet, this));
 		}
 		if(input.isKeyDown(Input.KEY_UP)) {
 			player.setPos(player.getX(), player.getY() - player.getVelY());
@@ -136,40 +121,40 @@ public class GameState extends BasicGameState {
 		
 		//LEVELS
 		if(level == 1) {
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 		}
 		if(level == 2) {
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 		}
 		if(level == 3) {
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100,  ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 		}
 		if(level == 4) {
 			//handler.clearEnemies();
-			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, ObjectID.WavingEnemy, this));
-			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, ObjectID.WavingEnemy, this));
-			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, ObjectID.WavingEnemy, this));
+			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100, ObjectID.WavingEnemy, this));
+			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100, ObjectID.WavingEnemy, this));
+			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100,  ObjectID.WavingEnemy, this));
 		}
 		if(level == 5) {
 			//handler.clearEnemies();
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, ObjectID.ArchingEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
 		}
 		if(level == 6) {
 			//handler.clearEnemies();
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, ObjectID.ArchingEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, ObjectID.BasicEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 		}
 	}
 

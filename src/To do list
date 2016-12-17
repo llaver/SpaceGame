@@ -6,43 +6,33 @@ Player
 		Weapon spread
 		Rate of fire
 		
-		
 	Upgrades
 		Extra Health
 		Damage resistance
 		Rate of fire
-		
-		
-	
 
 Bullets
 	Make PlayerBullet an interface
-		Create BasicBullet as subclass of PlayerBullet; Take PlayerBullet's current role
-	Create EnemyBullet interface
-		Create subclasses
+	Create enemy bullets subclasses
 	Powerups
 	 	Different weapons types
 	 	Different movement
-	Particles
-	
-	
+	Particles	
 
 Enemies
 	Particle explosion
 	Death animation
+	Health
 	New Enemies
 		Firing
 		Homing
 		Jumper
-		
-	
-
+	Bosses
+		Carrier (spawns minions)
 
 Levels
 	Waves instead of levels
 	Long thought out levels
-	
-
 
 Controls
 	

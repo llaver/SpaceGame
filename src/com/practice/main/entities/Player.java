@@ -1,16 +1,25 @@
 package com.practice.main.entities;
 
+import java.util.LinkedList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.state.BasicGameState;
 
+import com.practice.main.Game;
 import com.practice.main.Util;
 
 public class Player extends GameObject {
+	
+	private float MAXHEALTH = 100;
+	
+	private LinkedList<GameObject> objects;
+	
+	Handler handler = Game.handler;
 
-	public Player(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, id, state);
+	public Player(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
+		super(x, y, width, height, health, id, state);
 		
 		velX = .5f;
 		velY = .5f;
@@ -20,6 +29,17 @@ public class Player extends GameObject {
 
 	@Override
 	public void update() {
+		
+		objects = handler.getObjects();
+		
+		for(int i = 0; i < objects.size(); i++) {
+			if(objects.get(i).getID() != ObjectID.Player && objects.get(i).getID() != ObjectID.PlayerBullet) {
+				if(this.getShape().intersects(objects.get(i).getShape())) {
+					health = health - .3f;
+					health = Util.clamp(0, MAXHEALTH, health);
+				}
+			}
+		}
 		
 	}
 
@@ -32,6 +52,10 @@ public class Player extends GameObject {
 		float[] triangle = {x, y, x + width, y, x + width / 2, y - height};
 		g.fill(new Polygon(triangle));
 		
+	}
+	
+	public float getMaxHealth() {
+		return MAXHEALTH;
 	}
 
 }

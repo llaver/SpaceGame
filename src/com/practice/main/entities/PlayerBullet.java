@@ -7,14 +7,13 @@ import org.newdawn.slick.state.BasicGameState;
 
 import com.practice.main.Game;
 
-public class PlayerBullet extends GameObject {
+public class PlayerBullet extends PlayerWeapon {
 	
 	Handler handler = Game.handler;
 	Rectangle bullet;
 	
-	public PlayerBullet(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, id, state);
-		// TODO Auto-generated constructor stub
+	public PlayerBullet(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
+		super(x, y, width, height, health, id, state);
 		velX = 0;
 		velY = 1f;
 		

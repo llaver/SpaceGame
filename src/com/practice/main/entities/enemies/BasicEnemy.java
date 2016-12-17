@@ -21,8 +21,8 @@ public class BasicEnemy extends GameObject {
 	
 	Random r = new Random();
 	
-	public BasicEnemy(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, id, state);
+	public BasicEnemy(float x, float y, float width, float height,float health, ObjectID id, BasicGameState state) {
+		super(x, y, width, height, health, id, state);
 		
 		enemy = new Rectangle(x, y, width, height);
 		

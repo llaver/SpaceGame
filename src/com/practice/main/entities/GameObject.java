@@ -10,14 +10,16 @@ public abstract class GameObject {
 	protected float x, y;
 	protected float width, height;
 	protected float velX, velY;
+	protected float health;
 	protected ObjectID id;
 	protected BasicGameState state;
 	
-	public GameObject(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
+	public GameObject(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.health = health;
 		this.id = id;
 		this.state = state;
 	}
@@ -73,7 +75,15 @@ public abstract class GameObject {
 	
 	public float getVelY() {
 		return velY;
-	}	
+	}
+	
+	public void setHealth(float health) {
+		this.health = health;
+	}
+	
+	public float getHealth() {
+		return health;
+	}
 	
 	public void setState(BasicGameState state) {
 		this.state = state;

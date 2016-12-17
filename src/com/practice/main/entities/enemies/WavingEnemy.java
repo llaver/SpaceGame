@@ -25,8 +25,8 @@ public class WavingEnemy extends GameObject {
 	float deltaVelX = 0;
 	boolean negative = false;
 	
-	public WavingEnemy(float x, float y, float width, float height, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, id, state);
+	public WavingEnemy(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
+		super(x, y, width, height, health, id, state);
 		
 		enemy = new Rectangle(x, y, width, height);
 		archSize = r.nextInt(3) + 1;

@@ -30,6 +30,8 @@ public class GameState extends BasicGameState {
 	public static int LIVES = 3;
 	public static int LEVEL = 0;
 	
+	public static int DELTA;
+	
 	public static int SCORE = 0;
 	public static int MULTIPLIER = 0;
 	public static int LEVELTICKER = 0;
@@ -58,14 +60,12 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
-		handler.renderByState(g, this);
 		g.setColor(Color.white);
 		g.drawRect(49, 49, player.getMaxHealth() + 1, 26);
 		g.setColor(Color.red);
 		g.fillRect(50, 50, player.getMaxHealth(), 25);
 		g.setColor(Color.green);
 		g.fillRect(50, 50, player.getHealth(), 25);
-		System.out.println(player.getHealth());
 		
 		g.setColor(Color.white);
 		g.drawString("Score: " + SCORE, 50, 100);
@@ -74,11 +74,14 @@ public class GameState extends BasicGameState {
 		g.drawString("Ticks: " + LEVELTICKER, 50, 175);
 		g.drawString("Multiplier: " + MULTIPLIER, 50, 200);
 		
+		handler.renderByState(g, this);
+		
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+		DELTA = delta;		
+		
 		handler = Game.handler;
 		handler.updateByState(this);
 		//player.setPos(input.getMouseX() - 15, input.getMouseY() + 15);

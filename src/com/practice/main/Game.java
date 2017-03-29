@@ -15,9 +15,8 @@ public class Game extends StateBasedGame {
 
 	public static Handler handler = new Handler();
 	
-	public Game(String name) {
+	private Game(String name) {
 		super(name);
-		
 	}
 
 	public static void main(String[] args) throws SlickException {
@@ -35,8 +34,6 @@ public class Game extends StateBasedGame {
 		this.addState(new GameState());
 		this.addState(new PauseState());
 		this.addState(new GameOverState());
-		
-		
 	}
 
 }

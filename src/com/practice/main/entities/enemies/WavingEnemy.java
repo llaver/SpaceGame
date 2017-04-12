@@ -37,7 +37,6 @@ public class WavingEnemy extends GameObject {
 
 	@Override
 	public void update() {
-		System.out.println("archSize: " + archSize);
 		if(Math.abs(deltaVelX) <= delta) {
 			if(negative) {
 				velX = velX - .001f * archSize;

@@ -15,6 +15,7 @@ public class TextMenu extends MenuObject {
 	private Alignment horizontalAlignment = Alignment.CENTER;
 	private Alignment verticalAlignment = Alignment.CENTER;
 	private Object[] position;
+	Graphics graphics;
 	
 	
 	public TextMenu(float x, float y, float width, float height, Color backgroundColor, ObjectID id, BasicGameState state) {
@@ -63,6 +64,10 @@ public class TextMenu extends MenuObject {
 		this.verticalAlignment = verticalAlignment;
 		this.position = position;
 		
+		if(graphics != null) {
+			//FontMetrics metrics = Graphics.getFontMetrics(graphics.getFont());
+		}
+		
 		if(horizontalAlignment == Alignment.DEFAULT) {
 			this.horizontalAlignment = Alignment.CENTER;
 			
@@ -75,6 +80,10 @@ public class TextMenu extends MenuObject {
 	
 	}
 	
+	public void setFont(Font font) {
+		//graphics.setFont(font);
+	}
+	
 	@Override
 	public void update() {
 	
@@ -82,6 +91,11 @@ public class TextMenu extends MenuObject {
 	
 	@Override
 	public void render(Graphics g) {
-	
+		if(graphics != null) {
+			g.setFont(graphics.getFont());
+		}
+		graphics = g;
+		
+		
 	}
 }

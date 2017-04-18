@@ -1,0 +1,39 @@
+//TODO List
+
+Player
+	Powerups
+		Exploding bullets
+		Weapon spread
+		Rate of fire
+		
+	Upgrades
+		Extra Health
+		Damage resistance
+		Rate of fire
+
+Bullets
+	Make PlayerBullet an interface
+	Create enemy bullets subclasses
+	Powerups
+	 	Different weapons types
+	 	Different movement
+	Particles	
+
+Enemies
+	Particle explosion
+	Death animation
+	Health
+	New Enemies
+		Firing
+		Homing
+		Jumper
+	Bosses
+		Carrier (spawns minions)
+
+Levels
+	Waves instead of levels
+	Long thought out levels
+
+Controls
+	
+Options

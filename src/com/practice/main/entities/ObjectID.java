@@ -12,6 +12,7 @@ public enum ObjectID {
 	WavingEnemy,
 	PlayerBullet, 
 	ArchingEnemy,
+	PathEnemy,
 	
 	//Menus
 	TextMenu,

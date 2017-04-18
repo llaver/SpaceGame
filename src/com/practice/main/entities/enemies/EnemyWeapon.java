@@ -5,7 +5,7 @@ import org.newdawn.slick.state.BasicGameState;
 import com.practice.main.entities.GameObject;
 import com.practice.main.entities.ObjectID;
 
-public abstract class EnemyWeapon extends GameObject {
+public abstract class EnemyWeapon extends Enemy {
 	
 	public int weaponLevel = 1;
 	

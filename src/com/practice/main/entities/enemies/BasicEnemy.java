@@ -14,7 +14,7 @@ import com.practice.main.entities.Handler;
 import com.practice.main.entities.ObjectID;
 import com.practice.main.states.GameState;
 
-public class BasicEnemy extends GameObject {
+public class BasicEnemy extends Enemy {
 
 	Handler handler = Game.handler;
 	Rectangle enemy;

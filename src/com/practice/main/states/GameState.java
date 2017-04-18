@@ -3,6 +3,7 @@ package com.practice.main.states;
 import java.util.LinkedList;
 import java.util.Random;
 
+import com.practice.main.entities.enemies.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -18,9 +19,6 @@ import com.practice.main.entities.Handler;
 import com.practice.main.entities.ObjectID;
 import com.practice.main.entities.Player;
 import com.practice.main.entities.PlayerBullet;
-import com.practice.main.entities.enemies.ArchingEnemy;
-import com.practice.main.entities.enemies.BasicEnemy;
-import com.practice.main.entities.enemies.WavingEnemy;
 
 public class GameState extends BasicGameState {
 
@@ -122,11 +120,17 @@ public class GameState extends BasicGameState {
 		
 		
 		
+		
+		
 		//LEVELS
 		if(level == 1) {
 			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			
+			handler.addObject(new PathEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.PathEnemy, this));
+			handler.addObject(new PathEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.PathEnemy, this));
+			handler.addObject(new PathEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.PathEnemy, this));
 		}
 		if(level == 2) {
 			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
@@ -159,6 +163,33 @@ public class GameState extends BasicGameState {
 			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
 		}
+	}
+	
+	public void spawn(int level, int difficulty) {
+		int enemiesToSpawn = 0;
+		Enemy e1;
+		Enemy e2;
+		Enemy e3;
+		if(level < 5) {
+			enemiesToSpawn = 3 + (difficulty - 1);
+		} else if(level >= 5 && level <= 10) {
+			enemiesToSpawn = level + 2 + difficulty;
+		} else if(level > 10) {
+			enemiesToSpawn = 20;
+		}
+		
+		switch(level) {
+			case 1:
+				break;
+			
+		}
+		
+		for(int i = 0; i < enemiesToSpawn; i++) {
+			//handler.addObject();
+		}
+		
+		
+		
 	}
 
 	@Override

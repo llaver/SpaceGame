@@ -11,6 +11,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -18,6 +19,10 @@ public class GameOverState extends BasicGameState {
 	
 	Handler handler = Game.handler;
 	Input input;
+	
+	boolean pos = false;
+	Color col = Color.white;
+	int num = 0;
 	
 	public int timesRan = 0;
 	
@@ -97,29 +102,71 @@ public class GameOverState extends BasicGameState {
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.setColor(Color.white);
-		Circle c = new Circle(width / 2 + 20, height / 2 + 20, 250);
+		//g.setColor(Color.white);
+		Circle c = new Circle(width / 2, height / 2, 250);
+		Point[] points = new Point[10];
 		Circle[] subs = new Circle[10];
 		
-		System.out.println("circle number of points: " + c.getPointCount());
+		ArrayList<Point> ap = new ArrayList<>();
 		
+		//System.out.println("circle number of points: " + c.getPointCount());
 		
-		float[] points = c.getPoints();
-		
-		System.out.println("getPoints.length: " + points.length);
+		//System.out.println("getPoints.length: " + points.length);
 		int j = 0;
 		for(int i = 0; i < c.getPointCount() - 5; i += 5) {
-			subs[j] = new Circle(c.getPoint(i)[0], c.getPoint(i)[1], 75);
-			g.draw(subs[j]);
+			//subs[j] = new Circle(c.getPoint(i)[0], c.getPoint(i)[1], 75);
+			//g.draw(subs[j]);
 			j++;
 		}
 		
+		for(int i = 0; i < 10; i++) {
+			int degs = 36 * (i + 1);
+			//System.out.println("degs: " + degs);
+			points[i] = PointOnCircle(250, degs, new Point(width / 2, height / 2));
+			subs[i] = new Circle(points[i].x, points[i].y, 75);
+			//g.draw(subs[i]);
+		}
 		
-		for(int i = 0; i < c.getPointCount(); i++) {
+		for(int i = 0; i < subs.length; i++) {
+			for(int k = 0; k < 8; k++) {
+				ap.add(PointOnCircle(75, 45 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
+			}
 		}
 		
 		
-		g.draw(c);
+		for(int i = 0; i < subs.length; i++) {
+			Point[] ps = new Point[36];
+			
+			for(int k = 0; k < 8; k++) {
+				ps[k] = PointOnCircle(45, 10 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
+				for(int l = 0; l < ap.size(); l++) {
+				/*//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
+				if(k >= subs.length) {
+					g.drawLine(ps[k].x, ps[k].y, subs[subs.length - 1].getX(), subs[subs.length - 1].getY());
+				} else {
+					g.drawLine(ps[k].x, ps[k].y, subs[k].getX(), subs[k].getY());
+				}*/
+					if(num > 3) {
+						if(col.getRed() == 255 && col.getBlue() == 255 && col.getGreen() == 255) {
+							pos = false;
+						} else if(col.getRed() == 0 && col.getBlue() == 0 && col.getGreen() == 0) {
+							pos = true;
+						}
+						
+						col = loopColor(col, pos);
+						g.setColor(col);
+						num = 0;
+					}
+					num++;
+				
+					g.drawLine(ps[k].x, ps[k].y, ap.get(l).x, ap.get(l).y);
+				}
+			}
+			
+		}
+		
+		g.setColor(Color.green);
+		//g.draw(c);
 		
 	}
 	
@@ -135,12 +182,45 @@ public class GameOverState extends BasicGameState {
 		return 3;
 	}
 	
+	public Color loopColor(Color color, boolean positive) {
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		
+		if(positive) {
+			if(r >= 255 && g >= 255) {
+				b++;
+			} else if(r >= 255) {
+				g++;
+			} else {
+				r++;
+			}
+		} else if(!positive) {
+			if(r <= 0 && g <= 0) {
+				b--;
+			} else if(r <= 0) {
+				g--;
+			} else {
+				r--;
+			}
+		}
+		System.out.println("r: " + r + " g: " + g + " b: " + b);
+		return new Color(r, g, b);
+	}
 	
 	public int getRoundedIndex(int length, int toAdd, int index) {
 		if(index + toAdd >= length) {
 			return toAdd - (length - index) + 1;
 		}
 		return index + toAdd;
+	}
+	
+	public static Point PointOnCircle(float radius, float angleInDegrees, Point origin) {
+		// Convert from degrees to radians via multiplication by PI/180
+		float x = (float) (radius * Math.cos(angleInDegrees * Math.PI / 180F)) + origin.x;
+		float y = (float) (radius * Math.sin(angleInDegrees * Math.PI / 180F)) + origin.y;
+		
+		return new Point((int) x, (int) y);
 	}
 	
 }

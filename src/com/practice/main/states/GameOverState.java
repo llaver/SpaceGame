@@ -120,7 +120,7 @@ public class GameOverState extends BasicGameState {
 		}
 		
 		for(int i = 0; i < 10; i++) {
-			int degs = 36 * (i + 1);
+			int degs = 72 * (i + 1);
 			//System.out.println("degs: " + degs);
 			points[i] = PointOnCircle(250, degs, new Point(width / 2, height / 2));
 			subs[i] = new Circle(points[i].x, points[i].y, 75);
@@ -128,25 +128,25 @@ public class GameOverState extends BasicGameState {
 		}
 		
 		for(int i = 0; i < subs.length; i++) {
-			for(int k = 0; k < 8; k++) {
-				ap.add(PointOnCircle(75, 45 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
+			for(int k = 0; k < 5; k++) {
+				ap.add(PointOnCircle(75, 72 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
 			}
 		}
 		
 		
 		for(int i = 0; i < subs.length; i++) {
-			Point[] ps = new Point[36];
+			Point[] ps = new Point[5];
 			
-			for(int k = 0; k < 8; k++) {
-				ps[k] = PointOnCircle(45, 10 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
-				for(int l = 0; l < ap.size(); l++) {
-				/*//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
-				if(k >= subs.length) {
+			for(int k = 0; k < 5; k++) {
+				ps[k] = PointOnCircle(45, 72 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
+				for(int l = 0; l < ps.length; l++) {
+					//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
+				/*if(k >= subs.length) {
 					g.drawLine(ps[k].x, ps[k].y, subs[subs.length - 1].getX(), subs[subs.length - 1].getY());
 				} else {
 					g.drawLine(ps[k].x, ps[k].y, subs[k].getX(), subs[k].getY());
 				}*/
-					if(num > 3) {
+					/*if(num > 1) {
 						if(col.getRed() == 255 && col.getBlue() == 255 && col.getGreen() == 255) {
 							pos = false;
 						} else if(col.getRed() == 0 && col.getBlue() == 0 && col.getGreen() == 0) {
@@ -156,18 +156,18 @@ public class GameOverState extends BasicGameState {
 						col = loopColor(col, pos);
 						g.setColor(col);
 						num = 0;
-					}
-					num++;
-				
-					g.drawLine(ps[k].x, ps[k].y, ap.get(l).x, ap.get(l).y);
+					}*/
+					//num++;
+					
+					//g.drawLine(subs[i].getCenterX(), subs[i].getCenterY(), ps[k].x, ps[k].y);
+					
+					
+					//g.drawLine(ps[k].x, ps[k].y, ap.get(l).x, ap.get(l).y);
 				}
 			}
-			
 		}
-		
 		g.setColor(Color.green);
 		//g.draw(c);
-		
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package com.practice.main.states;
 
 import com.practice.main.Game;
+import com.practice.main.Util;
 import com.practice.main.entities.GameObject;
 import com.practice.main.entities.Handler;
 import org.newdawn.slick.*;
@@ -26,7 +27,9 @@ public class GameOverState extends BasicGameState {
 	
 	public int timesRan = 0;
 	
-	private LinkedList<GameObject> objects;
+	private LinkedList<Point> points = new LinkedList<>();
+	private boolean runOnce = false;
+	
 	private String pi = "3" +
 		"141592653589793238462643383279502884197169399375105" +
 		"82097494459230781640628620899862803482534211706798" +
@@ -120,7 +123,7 @@ public class GameOverState extends BasicGameState {
 		}
 		
 		for(int i = 0; i < 10; i++) {
-			int degs = 72 * (i + 1);
+			int degs = 36 * (i + 1);
 			//System.out.println("degs: " + degs);
 			points[i] = PointOnCircle(250, degs, new Point(width / 2, height / 2));
 			subs[i] = new Circle(points[i].x, points[i].y, 75);
@@ -128,46 +131,57 @@ public class GameOverState extends BasicGameState {
 		}
 		
 		for(int i = 0; i < subs.length; i++) {
-			for(int k = 0; k < 5; k++) {
-				ap.add(PointOnCircle(75, 72 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
+			for(int k = 0; k < 8; k++) {
+				ap.add(PointOnCircle(75, 45 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
 			}
 		}
 		
-		
-		for(int i = 0; i < subs.length; i++) {
-			Point[] ps = new Point[5];
-			
-			for(int k = 0; k < 5; k++) {
-				ps[k] = PointOnCircle(45, 72 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
-				for(int l = 0; l < ps.length; l++) {
-					//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
-				/*if(k >= subs.length) {
+		if(!runOnce) {
+			for(int i = 0; i < subs.length; i++) {
+				Point[] ps = new Point[36];
+				
+				for(int k = 0; k < 8; k++) {
+					ps[k] = PointOnCircle(45, 10 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
+					for(int l = 0; l < ap.size(); l++) {
+				//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
+				if(k <= ps.length) {
 					g.drawLine(ps[k].x, ps[k].y, subs[subs.length - 1].getX(), subs[subs.length - 1].getY());
 				} else {
 					g.drawLine(ps[k].x, ps[k].y, subs[k].getX(), subs[k].getY());
-				}*/
-					/*if(num > 1) {
-						if(col.getRed() == 255 && col.getBlue() == 255 && col.getGreen() == 255) {
-							pos = false;
-						} else if(col.getRed() == 0 && col.getBlue() == 0 && col.getGreen() == 0) {
-							pos = true;
-						}
-						
-						col = loopColor(col, pos);
-						g.setColor(col);
-						num = 0;
-					}*/
-					//num++;
-					
-					//g.drawLine(subs[i].getCenterX(), subs[i].getCenterY(), ps[k].x, ps[k].y);
-					
-					
-					//g.drawLine(ps[k].x, ps[k].y, ap.get(l).x, ap.get(l).y);
 				}
+						
+						Point p1 = new Point(ps[k].x, ps[k].y);
+						Point p2 = new Point(ap.get(l).x, ap.get(l).y);
+						if(!Util.listContainsPoint(this.points, p1)) {
+							this.points.add(p1);
+						}
+						if(!Util.listContainsPoint(this.points, p2)) {
+							this.points.add(p2);
+						}
+						//g.drawLine(ps[k].x, ps[k].y, ap.get(l).x, ap.get(l).y);
+					}
+				}
+			}
+			for(int i = 0; i < this.points.size() - 1; i++) {
+				if(num > 3) {
+					if(col.getRed() == 255 && col.getBlue() == 255 && col.getGreen() == 255) {
+						pos = false;
+					} else if(col.getRed() == 0 && col.getBlue() == 0 && col.getGreen() == 0) {
+						pos = true;
+					}
+					
+					col = loopColor(col, pos);
+					g.setColor(col);
+					num = 0;
+				}
+				num++;
+				//g.drawLine(this.points.get(i).x, this.points.get(i).y, this.points.get(i + 1).x, this.points.get(i + 1).y);
+				
 			}
 		}
 		g.setColor(Color.green);
 		//g.draw(c);
+		
 	}
 	
 	@Override

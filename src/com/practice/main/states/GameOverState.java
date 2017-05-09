@@ -4,6 +4,7 @@ import com.practice.main.Game;
 import com.practice.main.Util;
 import com.practice.main.entities.GameObject;
 import com.practice.main.entities.Handler;
+import com.practice.main.entities.Point;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -11,7 +12,6 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
@@ -22,12 +22,14 @@ public class GameOverState extends BasicGameState {
 	Input input;
 	
 	boolean pos = false;
-	Color col = Color.white;
+	Color col = new Color(0, 0, 0);
 	int num = 0;
+	int tracker = 0;
 	
 	public int timesRan = 0;
 	
 	private LinkedList<Point> points = new LinkedList<>();
+	private LinkedList<Point> smallList = new LinkedList<>();
 	private boolean runOnce = false;
 	
 	private String pi = "3" +
@@ -107,17 +109,19 @@ public class GameOverState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		//g.setColor(Color.white);
 		Circle c = new Circle(width / 2, height / 2, 250);
-		Point[] points = new Point[10];
+		java.awt.Point[] points = new java.awt.Point[10];
 		Circle[] subs = new Circle[10];
+		//g.setColor(col);
 		
-		ArrayList<Point> ap = new ArrayList<>();
+		ArrayList<java.awt.Point> ap = new ArrayList<>();
 		
 		//System.out.println("circle number of points: " + c.getPointCount());
 		
 		//System.out.println("getPoints.length: " + points.length);
+		
 		int j = 0;
 		for(int i = 0; i < c.getPointCount() - 5; i += 5) {
-			//subs[j] = new Circle(c.getPoint(i)[0], c.getPoint(i)[1], 75);
+			subs[j] = new Circle(c.getPoint(i)[0], c.getPoint(i)[1], 75);
 			//g.draw(subs[j]);
 			j++;
 		}
@@ -125,61 +129,87 @@ public class GameOverState extends BasicGameState {
 		for(int i = 0; i < 10; i++) {
 			int degs = 36 * (i + 1);
 			//System.out.println("degs: " + degs);
-			points[i] = PointOnCircle(250, degs, new Point(width / 2, height / 2));
+			points[i] = PointOnCircle(250, degs, new java.awt.Point(width / 2, height / 2));
 			subs[i] = new Circle(points[i].x, points[i].y, 75);
 			//g.draw(subs[i]);
 		}
 		
 		for(int i = 0; i < subs.length; i++) {
 			for(int k = 0; k < 8; k++) {
-				ap.add(PointOnCircle(75, 45 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
+				ap.add(PointOnCircle(75, 45 * (k + 1), new java.awt.Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY())));
 			}
 		}
 		
 		if(!runOnce) {
+			
 			for(int i = 0; i < subs.length; i++) {
-				Point[] ps = new Point[36];
+				java.awt.Point[] ps = new java.awt.Point[36];
 				
 				for(int k = 0; k < 8; k++) {
-					ps[k] = PointOnCircle(45, 10 * (k + 1), new Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
+					ps[k] = PointOnCircle(45, 10 * (k + 1), new java.awt.Point((int) subs[i].getCenterX(), (int) subs[i].getCenterY()));
 					for(int l = 0; l < ap.size(); l++) {
-				//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
-				if(k <= ps.length) {
-					g.drawLine(ps[k].x, ps[k].y, subs[subs.length - 1].getX(), subs[subs.length - 1].getY());
-				} else {
-					g.drawLine(ps[k].x, ps[k].y, subs[k].getX(), subs[k].getY());
-				}
+						//g.drawLine(ps[k].x, ps[k].y, ps[getRoundedIndex(ps.length, 20, k)].x, ps[getRoundedIndex(ps.length, 20, k)].y);
+						if(k <= ps.length) {
+							//g.drawLine(ps[k].x, ps[k].y, subs[subs.length - 1].getX(), subs[subs.length - 1].getY());
+						} else {
+							//g.drawLine(ps[k].x, ps[k].y, subs[k].getX(), subs[k].getY());
+						}
 						
-						Point p1 = new Point(ps[k].x, ps[k].y);
-						Point p2 = new Point(ap.get(l).x, ap.get(l).y);
-						if(!Util.listContainsPoint(this.points, p1)) {
-							this.points.add(p1);
+						if(num > 15) {
+							if(col.getRed() >= 255 && col.getBlue() >= 255 && col.getGreen() >= 255) {
+								pos = false;
+							} else if(col.getRed() <= 0 && col.getBlue() <= 0 && col.getGreen() <= 0) {
+								pos = true;
+							}
+							col = loopColor(col, pos);
+							num = 0;
 						}
-						if(!Util.listContainsPoint(this.points, p2)) {
-							this.points.add(p2);
-						}
+						num++;
+						
+						Point p1 = new Point(new java.awt.Point(ps[k].x, ps[k].y), col);
+						Point p2 = new Point(new java.awt.Point((int) ap.get(l).getX(), (int) ap.get(l).getY()), col);
+						//if(!Util.listContainsPoint(this.points, p1)) {
+						this.points.add(p1);
+						//}
+						//if(!Util.listContainsPoint(this.points, p2)) {
+						this.points.add(p2);
+						//}
 						//g.drawLine(ps[k].x, ps[k].y, ap.get(l).x, ap.get(l).y);
 					}
 				}
 			}
-			for(int i = 0; i < this.points.size() - 1; i++) {
-				if(num > 3) {
-					if(col.getRed() == 255 && col.getBlue() == 255 && col.getGreen() == 255) {
-						pos = false;
-					} else if(col.getRed() == 0 && col.getBlue() == 0 && col.getGreen() == 0) {
-						pos = true;
-					}
-					
-					col = loopColor(col, pos);
-					g.setColor(col);
-					num = 0;
-				}
-				num++;
-				//g.drawLine(this.points.get(i).x, this.points.get(i).y, this.points.get(i + 1).x, this.points.get(i + 1).y);
-				
-			}
+		/*for(int i = 0; i < this.points.size() - 1; i++) {
+			num++;
+			g.drawLine(this.points.get(i).x, this.points.get(i).y, this.points.get(i + 1).x, this.points.get(i + 1).y);
+			
+		}*/
+		smallList = shortenList(this.points, 21);
+		runOnce = true;
 		}
-		g.setColor(Color.green);
+		//System.out.println("points size: " + this.points.size());
+		if(tracker > smallList.size()) {
+			tracker = 0;
+		}
+		//System.out.println("points color: " + p.getColor().toString());
+		for(int i = tracker; i > 0; i--) {
+			Point toChange = smallList.get(i);
+			Color ctc = toChange.getColor();
+			System.out.println(ctc);
+			int alpha = ctc.getAlpha();
+			if(alpha > 10) {
+				alpha -= 3;
+			}
+			ctc = new Color(ctc.getRed(), ctc.getGreen(), ctc.getBlue(), alpha);
+			//System.out.println(ctc);
+			toChange.setColor(ctc);
+		}
+		for(int i = 0; i < smallList.size() - 1; i++) {
+			Point p = smallList.get(i);
+			g.setColor(p.getColor());
+			g.drawLine((float) p.getX(), (float) p.getY(), (float) smallList.get(i + 1).getX(), (float) smallList.get(i + 1).getY());
+			tracker++;
+		}
+		//g.setColor(Color.green);
 		//g.draw(c);
 		
 	}
@@ -203,19 +233,19 @@ public class GameOverState extends BasicGameState {
 		
 		if(positive) {
 			if(r >= 255 && g >= 255) {
-				b++;
+				b += 5;
 			} else if(r >= 255) {
-				g++;
+				g += 5;
 			} else {
-				r++;
+				r += 5;
 			}
 		} else if(!positive) {
 			if(r <= 0 && g <= 0) {
-				b--;
+				b -= 5;
 			} else if(r <= 0) {
-				g--;
+				g -= 5;
 			} else {
-				r--;
+				r -= 5;
 			}
 		}
 		System.out.println("r: " + r + " g: " + g + " b: " + b);
@@ -229,12 +259,25 @@ public class GameOverState extends BasicGameState {
 		return index + toAdd;
 	}
 	
-	public static Point PointOnCircle(float radius, float angleInDegrees, Point origin) {
+	public static java.awt.Point PointOnCircle(float radius, float angleInDegrees, java.awt.Point origin) {
 		// Convert from degrees to radians via multiplication by PI/180
 		float x = (float) (radius * Math.cos(angleInDegrees * Math.PI / 180F)) + origin.x;
 		float y = (float) (radius * Math.sin(angleInDegrees * Math.PI / 180F)) + origin.y;
 		
-		return new Point((int) x, (int) y);
+		return new java.awt.Point((int) x, (int) y);
+	}
+	
+	public LinkedList<Point> shortenList(LinkedList<Point> list, int num) {
+		LinkedList<Point> temp = new LinkedList<>();
+		int track = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if(track == num) {
+				temp.add(list.get(i));
+				track = 0;
+			}
+			track++;
+		}
+		return temp;
 	}
 	
 }

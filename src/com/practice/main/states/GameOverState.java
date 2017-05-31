@@ -69,7 +69,7 @@ public class GameOverState extends BasicGameState {
 				} else if(col.getRed() <= 0 && col.getBlue() <= 0 && col.getGreen() <= 0) {
 					pos = true;
 				}
-				col = getColor(10, i + j);
+				col = getColor(7, i + j);
 				
 				
 				Point pi = new Point(new java.awt.Point((int) javaAwtPoints.get(i).getX(), (int) javaAwtPoints.get(i).getY()), col);
@@ -115,6 +115,8 @@ public class GameOverState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		smallListPoints = progressList(smallListPoints);
+		System.out.println("smallList.size: " + smallListPoints.size());
+		System.out.println("tracker: " + tracker);
 		
 		if(tracker >= smallListPoints.size()) {
 			tracker = 0;
@@ -125,14 +127,14 @@ public class GameOverState extends BasicGameState {
 			Color ctc = toChange.getColor();
 			int alpha = (i * 255) / tracker;
 			if(alpha > 10) {
-				alpha -= 1;
+				alpha -= 10;
 			}
 			ctc = new Color(ctc.getRed(), ctc.getGreen(), ctc.getBlue(), alpha);
 			//System.out.println(ctc);
 			toChange.setColor(ctc);
+			
+			tracker++;
 		}
-		
-		tracker++;
 		
 	}
 	

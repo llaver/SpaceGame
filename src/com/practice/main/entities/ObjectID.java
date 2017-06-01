@@ -2,21 +2,11 @@ package com.practice.main.entities;
 
 public enum ObjectID {
 	
-	//Player
-	Player,
+	GameObject,
+	RandomPath,
+	GravityObj,
+	StellarBody,
 	
-	//NPCs
-	
-	//Enemies
-	BasicEnemy,
-	WavingEnemy,
-	PlayerBullet, 
-	ArchingEnemy,
-	PathEnemy,
-	
-	//Menus
-	TextMenu,
-	GameMenu,
 	
 	
 }

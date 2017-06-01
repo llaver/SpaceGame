@@ -55,15 +55,6 @@ public class Handler {
 		objects.clear();
 	}
 	
-	public void clearEnemies() {
-		for(int i = objects.size(); i > 0; i--) {
-			GameObject tempObject = objects.get(i - 1);
-			if(tempObject.getID() != ObjectID.Player) {
-				objects.remove(tempObject);
-			}
-		}
-	}
-	
 	public GameObject getObject(int index) {
 		return objects.get(index);
 	}

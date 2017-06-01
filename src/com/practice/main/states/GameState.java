@@ -1,3 +1,4 @@
+/*
 package com.practice.main.states;
 
 import java.util.LinkedList;
@@ -17,8 +18,6 @@ import com.practice.main.Util;
 import com.practice.main.entities.GameObject;
 import com.practice.main.entities.Handler;
 import com.practice.main.entities.ObjectID;
-import com.practice.main.entities.Player;
-import com.practice.main.entities.PlayerBullet;
 
 public class GameState extends BasicGameState {
 
@@ -199,3 +198,4 @@ public class GameState extends BasicGameState {
 	}
 
 }
+*/

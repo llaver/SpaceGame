@@ -13,10 +13,10 @@ public class Point extends java.awt.Point {
 	private Color color;
 	private java.awt.Point point;
 	
-	public Point(java.awt.Point p, Color c) {
-		point = p;
-		x = p.x;
-		y = p.y;
+	public Point(int x, int y, Color c) {
+		point = new java.awt.Point(x, y);
+		this.x = x;
+		this.y = y;
 		color = c;
 	}
 	

@@ -6,8 +6,9 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 
 public abstract class GameObject {
-
+	
 	protected float x, y;
+	
 	protected float width, height;
 	protected float velX, velY;
 	protected float health;
@@ -25,6 +26,7 @@ public abstract class GameObject {
 	}
 	
 	public abstract void update();
+	
 	public abstract void render(Graphics g);
 	
 	public void setX(float x) {
@@ -47,6 +49,10 @@ public abstract class GameObject {
 	public float getY() {
 		return y;
 	}
+	
+	public float getWidth() { return width; }
+	
+	public void setWidth(float width) { this.width = width;	}
 	
 	public void setID(ObjectID id) {
 		this.id = id;
@@ -97,4 +103,18 @@ public abstract class GameObject {
 		return new Rectangle(x, y, width, height);
 	}
 	
+	public boolean isEqual(Object obj) {
+		if(obj instanceof GameObject) {
+			return x   == ((GameObject) obj).getX()     &&
+				y      == ((GameObject) obj).getY()     &&
+				width  == ((GameObject) obj).getWidth() &&
+				height == ((GameObject) obj).getY()     &&
+				velX   == ((GameObject) obj).getY()     &&
+				velY   == ((GameObject) obj).getY()     &&
+				health == ((GameObject) obj).getY()     &&
+				id     == ((GameObject) obj).getID()    &&
+				state  == ((GameObject) obj).getState();
+		}
+		return false;
+	}
 }

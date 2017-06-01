@@ -52,11 +52,37 @@ public class GravityMovementState extends BasicGameState {
 		s1.setVelY((float) -.000003);
 		s1.setVelX((float) -.000003);
 		//Earth
-		StellarBody s2 = new StellarBody(500, 300,(float) 5.9742 * (10*24), 5, 0, ObjectID.StellarBody, this);
-		s2.setVelY((float) .000003);
-		s2.setVelX((float) .000003);
+		StellarBody s2 = new StellarBody(350, 70,(float) 5.9742 * (10*24), 5, 0, ObjectID.StellarBody, this);
+		s2.setVelY((float) .000001);
+		s2.setVelX((float) .000005);
 		//Black Hole!!!!!!
-		s3 = new StellarBody(300, 250,(float) 5.9742 * (10*24*10), 30, 0, ObjectID.StellarBody, this);
+		s3 = new StellarBody(350, 300,(float) 5.9742 * (10*200), 30, 0, ObjectID.StellarBody, this);
+		
+		
+		//Sun
+		StellarBody s4 = new StellarBody(2, 678,(float) 1.98892 * (10*12), 10, 0, ObjectID.StellarBody, this);
+		s4.setVelY((float) -.000003);
+		s4.setVelX((float) -.000003);
+		//Earth
+		StellarBody s5 = new StellarBody(350, 34,(float) 5.9742 * (10*30), 5, 0, ObjectID.StellarBody, this);
+		s5.setVelY((float) .000001);
+		s5.setVelX((float) .000005);
+		//Sun
+		StellarBody s6 = new StellarBody(300, 400,(float) 1.98892 * (10*35), 10, 0, ObjectID.StellarBody, this);
+		s6.setVelY((float) -.000003);
+		s6.setVelX((float) -.000003);
+		//Earth
+		StellarBody s7 = new StellarBody(0, 500,(float) 5.9742 * (10*40), 5, 0, ObjectID.StellarBody, this);
+		s7.setVelY((float) .000001);
+		s7.setVelX((float) .000005);
+		//Sun
+		StellarBody s8 = new StellarBody(100, 700,(float) 1.98892 * (10*25), 10, 0, ObjectID.StellarBody, this);
+		s8.setVelY((float) -.000003);
+		s8.setVelX((float) -.000003);
+		//Earth
+		StellarBody s9 = new StellarBody(500, 500,(float) 5.9742 * (10*29), 5, 0, ObjectID.StellarBody, this);
+		s9.setVelY((float) .000001);
+		s9.setVelX((float) .000005);
 		
 		
 		
@@ -66,9 +92,15 @@ public class GravityMovementState extends BasicGameState {
 		//handler.addObject(rp3);
 		//handler.addObject(lo);
 		//handler.addObject(go);
-		handler.addObject(s1);
+		//handler.addObject(s1);
 		handler.addObject(s2);
 		handler.addObject(s3);
+		handler.addObject(s4);
+		handler.addObject(s5);
+		handler.addObject(s6);
+		handler.addObject(s7);
+		handler.addObject(s8);
+		handler.addObject(s9);
 	}
 	
 	@Override

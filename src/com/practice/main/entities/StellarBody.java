@@ -32,7 +32,7 @@ public class StellarBody extends GameObject {
 	public StellarBody(float px, float py, float m, float r, float health, ObjectID id, BasicGameState state) {
 		super(px , py, 2*r, 2*r, health, id, state);
 		mass = m;
-		radius = r;
+		radius = m / 100;
 		
 		cols[0] = new Color(26, 0, 26);
 		cols[1] = new Color(77, 0, 77);

@@ -1,7 +1,7 @@
 package com.practice.main.entities;
 
 import com.practice.main.Game;
-import com.practice.main.states.GravityMovementState;
+import com.practice.main.states.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -40,8 +40,8 @@ public class RandomPath extends GameObject {
 		
 		maxStepLength = ThreadLocalRandom.current().nextInt( 20 + 1);
 		
-		x = r.nextInt(GravityMovementState.width);
-		y = r.nextInt(GravityMovementState.height);
+		x = r.nextInt(RandomMovementState.width);
+		y = r.nextInt(RandomMovementState.height);
 		
 		points.add(new Point((int) this.x, (int) this.y, Color.white));
 	}

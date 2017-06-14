@@ -10,24 +10,17 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Created by rbell on 6/1/2017.
+ * For simulating gravity effects on large stellar objects.
  */
 public class StellarBody extends GameObject {
 	
 	private float mass;
 	private float radius;
 	
-	double G = 6.67428e-11;
+	private Color[] cols = new Color[5];
 	
-	//Assumed scale: 100 pixels = 1AU
-	double AU = (149.6e6 * 1000); //149.6 million km, in meters.
-	double SCALE = 250 / AU;
-	double timestep = 24*3600;
-	
-	Color[] cols = new Color[5];
-	
-	Handler handler = Game.handler;
-	Random r = new Random();
+	private Handler handler = Game.handler;
+	private Random r = new Random();
 	
 	public StellarBody(float px, float py, float m, float r, float health, ObjectID id, BasicGameState state) {
 		super(px , py, 2*r, 2*r, health, id, state);
@@ -65,6 +58,7 @@ public class StellarBody extends GameObject {
 		}
 		velX += totalFX / mass;
 		velY += totalFY / mass;
+		double timestep = 24 * 3600;
 		x += velX * timestep;
 		y += velY * timestep;
 	
@@ -116,7 +110,8 @@ public class StellarBody extends GameObject {
 		}
 		
 		//Calculate force
-		double force = G * mass * body.getMass() / d*2;
+		double g = 6.67428e-11;
+		double force = g * mass * body.getMass() / d*2;
 		//System.out.println("Distance x and y:" );
 		
 		//Calculate direction of force
@@ -144,17 +139,15 @@ public class StellarBody extends GameObject {
 	
 	@Override
 	public boolean isEqual(Object obj) {
-		if(obj instanceof StellarBody) {
-			return x   == ((StellarBody) obj).getX()      &&
-				y      == ((StellarBody) obj).getY()      &&
-				mass   == ((StellarBody) obj).getMass()   &&
-				radius == ((StellarBody) obj).getRadius() &&
-				velX   == ((StellarBody) obj).getY()      &&
-				velY   == ((StellarBody) obj).getY()      &&
-				health == ((StellarBody) obj).getY()      &&
-				id     == ((StellarBody) obj).getID()     &&
-				state  == ((StellarBody) obj).getState();
-		}
-		return false;
+		return obj instanceof StellarBody             &&
+		    x      == ((StellarBody) obj).getX()      &&
+			y      == ((StellarBody) obj).getY()      &&
+			mass   == ((StellarBody) obj).getMass()   &&
+			radius == ((StellarBody) obj).getRadius() &&
+			velX   == ((StellarBody) obj).getY()      &&
+			velY   == ((StellarBody) obj).getY()      &&
+			health == ((StellarBody) obj).getY()      &&
+			id     == ((StellarBody) obj).getID()     &&
+			state  == ((StellarBody) obj).getState();
 	}
 }

@@ -1,7 +1,6 @@
 package com.practice.main;
 
-import com.practice.main.states.GravityMovementState;
-import com.practice.main.states.RandomMovement;
+import com.practice.main.states.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -31,7 +30,8 @@ public class Game extends StateBasedGame {
 		//this.addState(new MenuState());
 		//this.addState(new GameState());
 		//this.addState(new PauseState());
-		this.addState(new GravityMovementState());
+		//this.addState(new RandomMovementState());
+		this.addState(new SpirographState());
 	}
 
 }

@@ -7,7 +7,6 @@ import com.practice.main.entities.RandomPath;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -16,7 +15,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomMovement extends BasicGameState {
+public class RandomMovementState extends BasicGameState {
 	
 	Handler handler = Game.handler;
 	Input input;
@@ -25,7 +24,7 @@ public class RandomMovement extends BasicGameState {
 	
 	ArrayList<Point> points = new ArrayList();
 	
-	RandomPath randomPath = new RandomPath();
+	RandomPath randomPath;
 	
 	int[] tracker = new int[10];
 	int posTrack = 0;
@@ -41,6 +40,8 @@ public class RandomMovement extends BasicGameState {
 		input = container.getInput();
 		width = container.getWidth();
 		height = container.getHeight();
+		
+		randomPath = new RandomPath();
 		
 		maxStepLength = ThreadLocalRandom.current().nextInt( 20 + 1);;
 		

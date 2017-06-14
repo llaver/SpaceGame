@@ -43,7 +43,7 @@ public class GravityMovementState extends BasicGameState {
 		RandomPath rp2 = new RandomPath();
 		RandomPath rp3 = new RandomPath();
 		
-		//LineObj lo = new LineObj();
+		LineObj lo = new LineObj();
 		
 		//GravityObj go = new GravityObj(100, 500, 50, ObjectID.GravityObj, this);
 		
@@ -84,15 +84,12 @@ public class GravityMovementState extends BasicGameState {
 		s9.setVelY((float) .000001);
 		s9.setVelX((float) .000005);
 		
-		
-		
-		
-		//handler.addObject(rp);
-		//handler.addObject(rp2);
-		//handler.addObject(rp3);
-		//handler.addObject(lo);
+		handler.addObject(rp);
+		handler.addObject(rp2);
+		handler.addObject(rp3);
+		handler.addObject(lo);
 		//handler.addObject(go);
-		//handler.addObject(s1);
+		handler.addObject(s1);
 		handler.addObject(s2);
 		handler.addObject(s3);
 		handler.addObject(s4);

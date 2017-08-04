@@ -21,6 +21,9 @@ public class SpirographState extends BasicGameState {
 	Ellipse e;
 	Shape s;
 	float deg = 0;
+	int tracker = 0;
+	int waitTracker = 0;
+	boolean pos = true;
 	
 	ArrayList<Shape> al = new ArrayList<>();
 	Random r = new Random();
@@ -38,21 +41,83 @@ public class SpirographState extends BasicGameState {
 	
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
-		g.draw(s);
-		for(Shape s : al) {
-			//g.setColor(new Color(r.nextInt(250), r.nextInt(250), r.nextInt(250), r.nextInt(250)));
-			g.draw(s);
+		g.setColor(Color.white);
+		g.drawString("Fuck your Lol", 350, 100);
+		for(int i = 0; i < al.size(); i++) {
+			
+			g.setColor(getColor(170, i));
+			g.draw(al.get(i));
 		}
-		
 	}
 	
 	@Override
 	public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-		s = e.transform(Transform.createRotateTransform(deg, 400, 300));
-		if(al.size() > 50) {
-			al.remove(0);
+			if(pos) {
+				if(tracker > 10) {
+					s = e.transform(Transform.createRotateTransform(deg, 400, 300));
+					if(al.size() > 170) {
+						if(waitTracker < 300) {
+							waitTracker++;
+						} else {
+							pos = false;
+							waitTracker = 0;
+						}
+					} else {
+						al.add(s);
+						deg += 2;
+						tracker = 0;
+					}
+				}
+			} else {
+				if(tracker > 20) {
+					s = e.transform(Transform.createRotateTransform(deg, 400, 300));
+					if(al.size() <= 0) {
+						if(waitTracker < 50) {
+							waitTracker++;
+						} else {
+							pos = true;
+							waitTracker = 0;
+						}
+					} else {
+						al.remove(al.size() - 1);
+					}
+					tracker = 0;
+				}
+			}
+		tracker++;
+	}
+	
+	public Color getColor(int size, int index) {
+		int divisionSize = 1400 / size;
+		int value = divisionSize * index;
+		int red = 0;
+		int green = 0;
+		int blue = 0;
+		switch(value / 255) {
+			case 0:
+				red = 255;
+				blue = value;
+				break;
+			case 1:
+				red = 255 - value % 255;
+				blue = 255;
+				break;
+			case 2:
+				green = value % 255;
+				blue = 255;
+				break;
+			case 3:
+				green = 255;
+				blue = 255 - value % 255;
+				break;
+			case 4:
+				red = value % 255;
+				green = 255;
+				break;
+			default:
+				red = 255;
+				green = 255;
 		}
-		al.add(s);
-		deg += 20;
+		return new Color(red, green, blue);
 	}
 }

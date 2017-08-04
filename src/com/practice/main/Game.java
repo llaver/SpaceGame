@@ -19,7 +19,7 @@ public class Game extends StateBasedGame {
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Practice Game"));
 		
-		app.setDisplayMode(800, 600, false);
+		app.setDisplayMode(1600, 900, false);
 		app.setAlwaysRender(true);
 		
 		app.start();		
@@ -31,7 +31,7 @@ public class Game extends StateBasedGame {
 		//this.addState(new GameState());
 		//this.addState(new PauseState());
 		//this.addState(new RandomMovementState());
-		this.addState(new SpirographState());
+		this.addState(new TestState());
 	}
 
 }

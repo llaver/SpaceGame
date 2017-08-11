@@ -3,6 +3,8 @@ package com.practice.main.states;
 import com.practice.main.OpenSimplexNoise;
 import com.practice.main.Pathing;
 import com.practice.main.Position;
+import com.practice.main.Util;
+import com.practice.main.astar.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,6 +16,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -27,9 +30,12 @@ public class TestState extends BasicGameState {
 	
 	Position current = new Position();
 	Position previous = new Position();
+	private Random r = new Random();
+	private OpenSimplexNoise noise = new OpenSimplexNoise(r.nextLong());
+	public static double[][] map = new double[80][60];
 	
-	OpenSimplexNoise noise = new OpenSimplexNoise();
-	double[][] map = new double[80][60];
+	private Map<RoadNode> roadMap = new Map<RoadNode>(80, 60, new RoadNodeFactory());
+	private List<RoadNode> path;
 	
 	
 	@Override
@@ -42,10 +48,14 @@ public class TestState extends BasicGameState {
 		for(int i = 0; i < map.length; i++) {
 			//System.out.print("\n*");
 			for(int k = 0; k < map[i].length; k++) {
-				map[i][k] = noise.eval(i, k);
-				System.out.println(map[i][k]);
+				map[i][k] = noise.eval(i * .15, k * .15);
+				//System.out.println("i10: " + i * 10 + " k10: " + k * 10 + " 1i10: " + (i + 1) * 10 + " 1k10: " + (k + 1) * 10);
+				//System.out.println(map[i][k]);
 			}
 		}
+		path = roadMap.findPath(15, 0, 63, 57);
+		roadMap.drawMap(path);
+		
 	}
 	
 	@Override
@@ -67,12 +77,26 @@ public class TestState extends BasicGameState {
 		for(int i = 0; i < map.length; i++) {
 			for(int k = 0; k < map[i].length; k++) {
 				float current = (float) map[i][k];
-				g.setColor(new Color(1, 1, 1, Math.abs(current / 10)));
-				g.fillRect(i * 10, k * 10, (i + 1) * 10, (k + 1) * 10);
+				//System.out.println(current / 100);
+				byte col = (byte) (256 * map[i][k]);
+				g.setColor(new Color(col, col, col));
+				//g.fillRect(i * 10, k * 10, (i + 1) * 10, (k + 1) * 10);
+				
+				if(current >= -.2 && current <= .2 && !path.contains(new RoadNode(i, k))) {
+					g.setColor(Color.darkGray);
+					//g.fillRect(i, k, i, k);
+					g.fillRect(i * 10, k * 10, (i + 1) * 10, (k + 1) * 10);
+				} else if(path.contains(new RoadNode(i, k))) {
+					g.setColor(Color.green);
+					//g.fillRect(i, k, i,k);
+					g.fillRect(i * 10, k * 10, (i + 1) * 10, (k + 1) * 10);
+				} else {
+					g.setColor(Color.black);
+					//g.fillRect(i, k, i, k);
+					g.fillRect(i * 10, k * 10, (i + 1) * 10, (k + 1) * 10);
+				}
 			}
 		}
-		
-		
 	}
 	
 	@Override

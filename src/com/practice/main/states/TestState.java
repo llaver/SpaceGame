@@ -32,9 +32,9 @@ public class TestState extends BasicGameState {
 	Position previous = new Position();
 	private Random r = new Random();
 	private OpenSimplexNoise noise = new OpenSimplexNoise(r.nextLong());
-	public static double[][] map = new double[80][60];
+	public static double[][] map = new double[32][32];
 	
-	private Map<RoadNode> roadMap = new Map<RoadNode>(80, 60, new RoadNodeFactory());
+	private Map<RoadNode> roadMap = new Map<RoadNode>(32, 32, new RoadNodeFactory());
 	private List<RoadNode> path;
 	
 	
@@ -53,7 +53,7 @@ public class TestState extends BasicGameState {
 				//System.out.println(map[i][k]);
 			}
 		}
-		path = roadMap.findPath(15, 0, 63, 57);
+		path = roadMap.findPath(0, 31, 19, 0);
 		roadMap.drawMap(path);
 		
 	}

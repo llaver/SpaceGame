@@ -45,8 +45,8 @@ public class RandomMovementState extends BasicGameState {
 		
 		maxStepLength = ThreadLocalRandom.current().nextInt( 20 + 1);;
 		
-		x = r.nextInt(width);
-		y = r.nextInt(height);
+		x = r.nextInt(1600);
+		y = r.nextInt(900);
 		
 		points.add(new Point(x, y, Color.white));
 	}

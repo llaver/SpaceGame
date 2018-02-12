@@ -75,6 +75,11 @@ public class GravityObj extends GameObject {
 		}
 	}
 	
+	@Override
+	public void collision(GameObject object) {
+	
+	}
+	
 	public int getForce(int distance) {
 		if(distance != 0) {
 			return distance / rad;

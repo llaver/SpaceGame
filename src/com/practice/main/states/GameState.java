@@ -14,7 +14,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.practice.main.Game;
-import com.practice.main.Util;
+import com.practice.main.util.Util;
 import com.practice.main.entities.GameObject;
 import com.practice.main.entities.Handler;
 import com.practice.main.entities.ObjectID;

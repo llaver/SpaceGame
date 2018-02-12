@@ -11,6 +11,8 @@ import com.practice.main.entities.Handler;
 public class Game extends StateBasedGame {
 
 	public static Handler handler = new Handler();
+	public static int WIDTH = 1600;
+	public static int HEIGHT = 900;
 	
 	private Game(String name) {
 		super(name);
@@ -19,7 +21,7 @@ public class Game extends StateBasedGame {
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Practice Game"));
 		
-		app.setDisplayMode(320, 320, false);
+		app.setDisplayMode(WIDTH, HEIGHT, false);
 		app.setAlwaysRender(true);
 		
 		app.start();		
@@ -31,7 +33,11 @@ public class Game extends StateBasedGame {
 		//this.addState(new GameState());
 		//this.addState(new PauseState());
 		//this.addState(new RandomMovementState());
-		this.addState(new TestState());
+		//this.addState(new TestState());
+		//this.addState(new SpirographState());
+		this.addState(new GravityMovementState());
+		//this.addState(new RandomMovementState());
+		//this.addState(new ParticleCollisionState());
 	}
 
 }

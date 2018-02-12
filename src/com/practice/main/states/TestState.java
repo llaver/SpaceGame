@@ -3,15 +3,11 @@ package com.practice.main.states;
 import com.practice.main.OpenSimplexNoise;
 import com.practice.main.Pathing;
 import com.practice.main.Position;
-import com.practice.main.Util;
 import com.practice.main.astar.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Ellipse;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -48,12 +44,12 @@ public class TestState extends BasicGameState {
 		for(int i = 0; i < map.length; i++) {
 			//System.out.print("\n*");
 			for(int k = 0; k < map[i].length; k++) {
-				map[i][k] = noise.eval(i * .15, k * .15);
+				map[i][k] = noise.eval(i * .25, k * .15);
 				//System.out.println("i10: " + i * 10 + " k10: " + k * 10 + " 1i10: " + (i + 1) * 10 + " 1k10: " + (k + 1) * 10);
 				//System.out.println(map[i][k]);
 			}
 		}
-		path = roadMap.findPath(0, 31, 19, 0);
+		path = roadMap.findPath(0, 31, 31, 0);
 		roadMap.drawMap(path);
 		
 	}

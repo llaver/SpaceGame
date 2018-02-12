@@ -6,7 +6,10 @@ public enum ObjectID {
 	RandomPath,
 	GravityObj,
 	StellarBody,
-	
-	
+	Atom,
+	Particle,
+	Proton,
+	Electron,
+	Neutron
 	
 }

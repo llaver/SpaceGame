@@ -79,6 +79,11 @@ public class StellarBody extends GameObject {
 		
 	}
 	
+	@Override
+	public void collision(GameObject object) {
+	
+	}
+	
 	
 	public float[] getAttraction(StellarBody body) {
 		if(isEqual(body)) {

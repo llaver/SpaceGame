@@ -1,20 +1,31 @@
 package com.practice.main.states;
 
 import com.practice.main.Game;
+import com.practice.main.OpenSimplexNoise;
+import com.practice.main.Pathing;
+import com.practice.main.Position;
+import com.practice.main.astar.Map;
+import com.practice.main.astar.RoadNode;
+import com.practice.main.astar.RoadNodeFactory;
 import com.practice.main.entities.*;
+import com.practice.main.util.IDTracker;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Ellipse;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GravityMovementState extends BasicGameState {
+public class GravityMovementState extends BasicGameState implements KeyListener {
 	
 	Handler handler = Game.handler;
 	Input input;
@@ -32,6 +43,32 @@ public class GravityMovementState extends BasicGameState {
 	private boolean runOnce = false;
 	
 	private int maxStepLength;
+	
+	public static List<GameObject> objects = new ArrayList<>();
+	public static List<Atom> atoms = new ArrayList<>();
+	public static List<Particle> particles = new ArrayList<>();
+	
+	private boolean reset = false;
+	
+	Pathing p = new Pathing();
+	ArrayList<Position> line;
+	
+	Position current = new Position();
+	Position previous = new Position();
+	private OpenSimplexNoise noise = new OpenSimplexNoise(r.nextLong());
+	public static double[][] map = new double[32][32];
+	
+	private Map<RoadNode> roadMap = new Map<RoadNode>(32, 32, new RoadNodeFactory());
+	private List<RoadNode> path;
+	
+	Ellipse e;
+	Shape s;
+	float deg = 0;
+	int spiroTracker = 0;
+	int waitTracker = 0;
+	boolean pos = true;
+	
+	ArrayList<Shape> al = new ArrayList<>();
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -98,18 +135,138 @@ public class GravityMovementState extends BasicGameState {
 		handler.addObject(s7);
 		handler.addObject(s8);
 		handler.addObject(s9);
+		
+		for(int i = 0; i < map.length; i++) {
+			//System.out.print("\n*");
+			for(int k = 0; k < map[i].length; k++) {
+				map[i][k] = noise.eval(i * .25, k * .15);
+				//System.out.println("i10: " + i * 10 + " k10: " + k * 10 + " 1i10: " + (i + 1) * 10 + " 1k10: " + (k + 1) * 10);
+				//System.out.println(map[i][k]);
+			}
+		}
+		path = roadMap.findPath(0, 31, 31, 0);
+		roadMap.drawMap(path);
+		
+		atoms.add(new Atom(10, Game.HEIGHT / 2, 1, 0, 1, 0, 5, 5, 5, IDTracker.claimNextID(), this));
+		atoms.add(new Atom(Game.WIDTH - 10, Game.HEIGHT / 2, -1, 0, -1, 0, 5, 5, 5, IDTracker.claimNextID(), this));
+		
+		objects.addAll(atoms);
+		
+		e = new Ellipse(1400, 300, 40, 150);
+		s = e;
+		
+	}
+	
+	@Override
+	public void keyPressed(int key, char c) {
+		if (key == Input.KEY_SPACE) {
+			reset = true;
+		}
 	}
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		handler.update();
 		s3.setVel(0, 0);
+		
+		if(reset) {
+			atoms.clear();
+			
+			atoms.add(new Atom(10, Game.HEIGHT / 2, 1, 0, 1, 0, 5, 5, 5, IDTracker.claimNextID(), this));
+			atoms.add(new Atom(Game.WIDTH - 10, Game.HEIGHT / 2, -1, 0, -1, 0, 5, 5, 5, IDTracker.claimNextID(), this));
+			
+			reset = false;
+		}
+		objects.clear();
+		particles.clear();
+		
+		for(Atom atom : atoms) {
+			particles.addAll(atom.getParticles());
+		}
+		
+		objects.addAll(atoms);
+		objects.addAll(particles);
+		
+		for(Atom atom : atoms) {
+			atom.update();
+		}
+		
+		if(pos) {
+			if(spiroTracker > 10) {
+				s = e.transform(Transform.createRotateTransform(deg, 1400, 300));
+				if(al.size() > 170) {
+					if(waitTracker < 300) {
+						waitTracker++;
+					} else {
+						pos = false;
+						waitTracker = 0;
+					}
+				} else {
+					al.add(s);
+					deg += 2;
+					spiroTracker = 0;
+				}
+			}
+		} else {
+			if(spiroTracker > 20) {
+				s = e.transform(Transform.createRotateTransform(deg, 1400, 300));
+				if(al.size() <= 0) {
+					if(waitTracker < 50) {
+						waitTracker++;
+					} else {
+						pos = true;
+						waitTracker = 0;
+					}
+				} else {
+					al.remove(al.size() - 1);
+				}
+				spiroTracker = 0;
+			}
+		}
+		spiroTracker++;
+		
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+		for(int i = 0; i < map.length; i++) {
+			for(int k = 0; k < map[i].length; k++) {
+				float current = (float) map[i][k];
+				//System.out.println(current / 100);
+				byte col = (byte) (256 * map[i][k]);
+				g.setColor(new Color(col, col, col));
+				//g.fillRect(i * 10, k * 10, (i + 1) * 10, (k + 1) * 10);
+				
+				if(current >= -.2 && current <= .2 && !path.contains(new RoadNode(i, k))) {
+					g.setColor(Color.darkGray);
+					//g.fillRect(i, k, i, k);
+					g.fillRect(i * 10 + 1300, k * 10 + 600, (i + 1) * 10, (k + 1) * 10);
+				} else if(path.contains(new RoadNode(i, k))) {
+					g.setColor(Color.green);
+					//g.fillRect(i, k, i,k);
+					g.fillRect(i * 10 + 1300, k * 10 + 600, (i + 1) * 10, (k + 1) * 10);
+				} else {
+					g.setColor(Color.black);
+					//g.fillRect(i, k, i, k);
+					g.fillRect(i * 10 + 1300, k * 10 + 600, (i + 1) * 10, (k + 1) * 10);
+				}
+			}
+		}
+		
+		g.setColor(Color.white);
+		g.drawString("Fuck your Lol", 1350, 100);
+		for(int i = 0; i < al.size(); i++) {
+			
+			g.setColor(getColor(170, i));
+			g.draw(al.get(i));
+		}
+		
 		handler.render(g);
-
+		
+		for(GameObject object : objects) {
+			object.render(g);
+		}
+		
 	}
 	
 	@Override

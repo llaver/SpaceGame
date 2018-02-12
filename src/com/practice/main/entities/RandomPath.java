@@ -40,8 +40,8 @@ public class RandomPath extends GameObject {
 		
 		maxStepLength = ThreadLocalRandom.current().nextInt( 20 + 1);
 		
-		x = r.nextInt(RandomMovementState.width);
-		y = r.nextInt(RandomMovementState.height);
+		x = r.nextInt(1600);
+		y = r.nextInt(900);
 		
 		points.add(new Point((int) this.x, (int) this.y, Color.white));
 	}
@@ -109,6 +109,11 @@ public class RandomPath extends GameObject {
 			}
 		}
 		
+	}
+	
+	@Override
+	public void collision(GameObject object) {
+	
 	}
 	
 	@Override

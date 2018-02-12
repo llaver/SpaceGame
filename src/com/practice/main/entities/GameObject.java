@@ -29,6 +29,8 @@ public abstract class GameObject {
 	
 	public abstract void render(Graphics g);
 	
+	public abstract void collision(GameObject object);
+	
 	public void setX(float x) {
 		this.x = x;
 	}
@@ -50,9 +52,13 @@ public abstract class GameObject {
 		return y;
 	}
 	
-	public float getWidth() { return width; }
+	public float getWidth() {
+		return width;
+	}
 	
-	public void setWidth(float width) { this.width = width;	}
+	public void setWidth(float width) {
+		this.width = width;
+	}
 	
 	public void setID(ObjectID id) {
 		this.id = id;
@@ -103,17 +109,21 @@ public abstract class GameObject {
 		return new Rectangle(x, y, width, height);
 	}
 	
+	public boolean intersects(GameObject object) {
+		return object != null && this.getShape().intersects(object.getShape());
+	}
+	
 	public boolean isEqual(Object obj) {
 		if(obj instanceof GameObject) {
-			return x   == ((GameObject) obj).getX()     &&
-				y      == ((GameObject) obj).getY()     &&
-				width  == ((GameObject) obj).getWidth() &&
-				height == ((GameObject) obj).getY()     &&
-				velX   == ((GameObject) obj).getY()     &&
-				velY   == ((GameObject) obj).getY()     &&
-				health == ((GameObject) obj).getY()     &&
-				id     == ((GameObject) obj).getID()    &&
-				state  == ((GameObject) obj).getState();
+			return x == ((GameObject) obj).getX() &&
+				y == ((GameObject) obj).getY() &&
+				width == ((GameObject) obj).getWidth() &&
+				height == ((GameObject) obj).getY() &&
+				velX == ((GameObject) obj).getY() &&
+				velY == ((GameObject) obj).getY() &&
+				health == ((GameObject) obj).getY() &&
+				id == ((GameObject) obj).getID() &&
+				state == ((GameObject) obj).getState();
 		}
 		return false;
 	}

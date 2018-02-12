@@ -77,6 +77,11 @@ public class LineObj extends GameObject {
 	}
 	
 	@Override
+	public void collision(GameObject object) {
+	
+	}
+	
+	@Override
 	public float getX() {
 		return this.posx;
 	}

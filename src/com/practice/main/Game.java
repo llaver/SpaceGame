@@ -3,6 +3,7 @@ package com.practice.main;
 import com.practice.main.states.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -17,6 +18,8 @@ public class Game extends StateBasedGame {
 	private Game(String name) {
 		super(name);
 	}
+	
+	public static Input input;
 
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game("Practice Game"));
@@ -24,18 +27,22 @@ public class Game extends StateBasedGame {
 		app.setDisplayMode(WIDTH, HEIGHT, false);
 		app.setAlwaysRender(true);
 		
-		app.start();		
+		app.start();
 	}
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		//this.addState(new MenuState());
-		//this.addState(new GameState());
-		//this.addState(new PauseState());
+		Assets.load();
+		
+		input = container.getInput();
+		
+		this.addState(new MenuState());
+		this.addState(new GameState());
+		this.addState(new PauseState());
 		//this.addState(new RandomMovementState());
 		//this.addState(new TestState());
 		//this.addState(new SpirographState());
-		this.addState(new GravityMovementState());
+		//this.addState(new GravityMovementState());
 		//this.addState(new RandomMovementState());
 		//this.addState(new ParticleCollisionState());
 	}

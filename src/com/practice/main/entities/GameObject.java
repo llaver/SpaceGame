@@ -60,6 +60,14 @@ public abstract class GameObject {
 		this.width = width;
 	}
 	
+	public float getHeight() {
+		return height;
+	}
+	
+	public void setHeight(float height) {
+		this.height = height;
+	}
+	
 	public void setID(ObjectID id) {
 		this.id = id;
 	}
@@ -114,17 +122,15 @@ public abstract class GameObject {
 	}
 	
 	public boolean isEqual(Object obj) {
-		if(obj instanceof GameObject) {
-			return x == ((GameObject) obj).getX() &&
-				y == ((GameObject) obj).getY() &&
-				width == ((GameObject) obj).getWidth() &&
-				height == ((GameObject) obj).getY() &&
-				velX == ((GameObject) obj).getY() &&
-				velY == ((GameObject) obj).getY() &&
-				health == ((GameObject) obj).getY() &&
-				id == ((GameObject) obj).getID() &&
-				state == ((GameObject) obj).getState();
-		}
-		return false;
+		return obj instanceof GameObject &&
+			x == ((GameObject) obj).getX() &&
+			y == ((GameObject) obj).getY() &&
+			width == ((GameObject) obj).getWidth() &&
+			height == ((GameObject) obj).getY() &&
+			velX == ((GameObject) obj).getY() &&
+			velY == ((GameObject) obj).getY() &&
+			health == ((GameObject) obj).getY() &&
+			id == ((GameObject) obj).getID() &&
+			state == ((GameObject) obj).getState();
 	}
 }

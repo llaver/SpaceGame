@@ -2,6 +2,11 @@ package com.practice.main.entities;
 
 public enum ObjectID {
 	
+	Player,
+	PlayerBullet,
+	
+	
+	
 	GameObject,
 	RandomPath,
 	GravityObj,
@@ -10,6 +15,6 @@ public enum ObjectID {
 	Particle,
 	Proton,
 	Electron,
-	Neutron
+	BasicEnemy, PathEnemy, WavingEnemy, ArchingEnemy, Neutron
 	
 }

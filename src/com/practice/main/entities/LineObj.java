@@ -1,14 +1,11 @@
 package com.practice.main.entities;
 
 import com.practice.main.Game;
-import com.practice.main.states.GravityMovementState;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by rbell on 5/31/2017.
@@ -32,7 +29,7 @@ public class LineObj extends GameObject {
 	Handler handler = Game.handler;
 	
 	public LineObj() {
-		super(0, 0, 0, 0, 0, null, null);
+		super(0, 0, 0, 0, 0, null, -0, null);
 		
 		this.posx = 0;
 		this.posy = 100;
@@ -40,8 +37,8 @@ public class LineObj extends GameObject {
 	}
 	
 	
-	public LineObj(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+	public LineObj(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		
 		this.posx = 0;
 		this.posy = 100;
@@ -49,7 +46,7 @@ public class LineObj extends GameObject {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int delta) {
 		
 		this.posx += 1;
 		

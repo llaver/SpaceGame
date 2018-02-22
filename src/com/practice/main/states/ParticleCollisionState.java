@@ -72,7 +72,7 @@ public class ParticleCollisionState extends BasicGameState implements KeyListene
 		objects.addAll(particles);
 
 		for(Atom atom : atoms) {
-			atom.update();
+			atom.update(delta);
 		}
 		
 	}

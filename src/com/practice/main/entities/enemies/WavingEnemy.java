@@ -42,7 +42,7 @@ public class WavingEnemy extends Enemy {
 	}
 
 	@Override
-	public void update() {
+	public void update(int delta) {
 		if(Math.abs(deltaVelX) <= delta) {
 			if(negative) {
 				velX = velX - .003f * archSize;

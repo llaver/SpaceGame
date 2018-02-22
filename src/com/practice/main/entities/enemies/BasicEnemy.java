@@ -37,7 +37,7 @@ public class BasicEnemy extends Enemy {
 	}
 
 	@Override
-	public void update() {
+	public void update(int delta) {
 		x += velX;
 		y += velY;
 		

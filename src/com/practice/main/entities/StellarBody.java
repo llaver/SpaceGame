@@ -23,7 +23,7 @@ public class StellarBody extends GameObject {
 	private Random r = new Random();
 	
 	public StellarBody(float px, float py, float m, float r, float health, ObjectID id, BasicGameState state) {
-		super(px , py, 2*r, 2*r, health, id, state);
+		super(px , py, 2*r, 2*r, health, id, , state, );
 		mass = m;
 		radius = m / 100;
 		
@@ -39,7 +39,7 @@ public class StellarBody extends GameObject {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int delta) {
 		System.out.println(x + " " + y + " " + velX + " " + velY);
 		
 		LinkedList<GameObject> objects = handler.getObjects();

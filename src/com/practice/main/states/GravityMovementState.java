@@ -166,7 +166,7 @@ public class GravityMovementState extends BasicGameState implements KeyListener 
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		handler.update();
+		handler.update(delta);
 		s3.setVel(0, 0);
 		
 		if(reset) {
@@ -188,7 +188,7 @@ public class GravityMovementState extends BasicGameState implements KeyListener 
 		objects.addAll(particles);
 		
 		for(Atom atom : atoms) {
-			atom.update();
+			atom.update(delta);
 		}
 		
 		if(pos) {

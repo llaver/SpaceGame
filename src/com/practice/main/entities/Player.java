@@ -9,7 +9,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
@@ -33,7 +32,7 @@ public class Player extends GameObject {
 	Input input = Game.input;
 
 	public Player(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+		super(x, y, width, height, health, id, , state, );
 		
 		velX = .5f;
 		velY = .5f;
@@ -60,10 +59,9 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void update() {
+	public void update(int delta) {
 		system.update(GameState.DELTA);
-		
-		
+
 		y = Util.clamp(100, Game.HEIGHT - height, y);
 		x = Util.clamp(0, Game.WIDTH - width, x);
 		
@@ -79,19 +77,20 @@ public class Player extends GameObject {
 		}
 		
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
-			handler.addObject(new PlayerBullet(x + width / 2 - 1, Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, GameState.gameState));
+			handler.addObject(new PlayerBullet((float) (x + width * .2 - 1), Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, GameState.gameState));
+			handler.addObject(new PlayerBullet((float) (x + width * .8 - 1), Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, GameState.gameState));
 		}
 		if(input.isKeyDown(Input.KEY_UP)) {
-			setPos(x, y - velY);
+			setPos(x, y - velY * delta);
 		}
 		if(input.isKeyDown(Input.KEY_DOWN)) {
-			setPos(x, y + velY);
+			setPos(x, y + velY * delta);
 		}
 		if(input.isKeyDown(Input.KEY_LEFT)) {
-			setPos(x - velX, y);
+			setPos(x - velX * delta, y);
 		}
 		if(input.isKeyDown(Input.KEY_RIGHT)) {
-			setPos(x + velX, y);
+			setPos(x + velX * delta, y);
 		}
 		
 	}

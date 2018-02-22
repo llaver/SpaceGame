@@ -59,7 +59,6 @@ public class GameState extends BasicGameState {
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
 		g.setColor(Color.white);
 		g.drawRect(49, 49, player.getMaxHealth() + 1, 26);
 		g.setColor(Color.red);
@@ -83,7 +82,7 @@ public class GameState extends BasicGameState {
 		DELTA = delta;
 
 		handler = Game.handler;
-		handler.updateByState(this);
+		handler.updateByState(this, delta);
 		//player.setPos(input.getMouseX() - 15, input.getMouseY() + 15);
 		LEVELTICKER++;
 		CURRENCY++;

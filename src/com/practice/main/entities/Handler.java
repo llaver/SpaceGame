@@ -9,11 +9,11 @@ public class Handler {
 
 	LinkedList<GameObject> objects = new LinkedList<GameObject>();
 	
-	public void update() {
+	public void update(int delta) {
 		for(int i = 0; i < objects.size(); i++) {
 			GameObject tempObject = objects.get(i);
 			
-			tempObject.update();
+			tempObject.update(delta);
 		}
 	}
 	
@@ -25,11 +25,11 @@ public class Handler {
 		}
 	}
 	
-	public void updateByState(BasicGameState state) {
+	public void updateByState(BasicGameState state, int delta) {
 		for(int i = 0; i < objects.size(); i++) {
 			GameObject tempObject = objects.get(i);
 			if(tempObject.getState() == state) {
-				tempObject.update();
+				tempObject.update(delta);
 			}
 		}
 	}

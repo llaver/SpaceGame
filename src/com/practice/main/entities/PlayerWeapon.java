@@ -8,7 +8,7 @@ public abstract class PlayerWeapon extends GameObject {
 	
 
 	public PlayerWeapon(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+		super(x, y, width, height, health, id, , state, );
 	}
 	public int getWeaponLevel() {
 		return weaponLevel;

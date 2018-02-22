@@ -40,7 +40,7 @@ public class ArchingEnemy extends Enemy {
 	}
 
 	@Override
-	public void update() {
+	public void update(int delta) {
 		if(Math.abs(deltaVelX) <= 1000) {
 			if(negative) {
 				velX = velX - .00007f * archSize;

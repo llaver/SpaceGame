@@ -15,7 +15,7 @@ public abstract class GameObject {
 	protected ObjectID id;
 	protected BasicGameState state;
 	
-	public GameObject(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
+	protected GameObject(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -25,7 +25,7 @@ public abstract class GameObject {
 		this.state = state;
 	}
 	
-	public abstract void update();
+	public abstract void update(int delta);
 	
 	public abstract void render(Graphics g);
 	

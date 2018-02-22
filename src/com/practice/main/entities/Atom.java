@@ -2,7 +2,6 @@ package com.practice.main.entities;
 
 import com.practice.main.Game;
 import com.practice.main.states.GravityMovementState;
-import com.practice.main.states.ParticleCollisionState;
 import com.practice.main.util.IDTracker;
 import com.practice.main.util.Util;
 import org.newdawn.slick.Color;
@@ -28,7 +27,7 @@ public class Atom extends GameObject {
 	private boolean isAtom = true;
 	
 	public Atom(float x, float y, float velX, float velY, float accelX, float accelY, int protonCount, int electronCount, int neutronCount, int idNum, BasicGameState state) {
-		super(x, y, 10, 10, 100, ObjectID.Atom, state);
+		super(x, y, 10, 10, 100, ObjectID.Atom, , state, );
 		
 		this.x = x;
 		this.y = y;
@@ -58,7 +57,7 @@ public class Atom extends GameObject {
 	}
 	
 	public Atom(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+		super(x, y, width, height, health, id, , state, );
 	}
 	
 	public List<Particle> getParticles() {
@@ -87,7 +86,7 @@ public class Atom extends GameObject {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int delta) {
 		velX += accelX;
 		velY += accelY;
 		
@@ -114,7 +113,7 @@ public class Atom extends GameObject {
 		y += velY;
 		
 		for(Particle particle : particles) {
-			particle.update();
+			particle.update(delta);
 		}
 		
 		if(isAtom) {

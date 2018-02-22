@@ -7,9 +7,11 @@ import org.newdawn.slick.SpriteSheet;
 public class Assets {
 	
 	public static SpriteSheet EnemyShips;
-	
+	public static SpriteSheet PlayerShips;
+
 	public static Image Player;
-	
+	public static Image PlayerUpgraded;
+
 	public static Image Recon1;
 	public static Image Recon2;
 	public static Image Recon3;
@@ -27,10 +29,11 @@ public class Assets {
 		
 		try {
 			EnemyShips = new SpriteSheet("res/img/enemies/EnemyShips01.png", 32, 32);
-			
-			//TODO Replace temp Player with updated.
-			Player = EnemyShips.getSprite(2, 2);
-		
+			PlayerShips = new SpriteSheet("res/img/player/Playership.png", 32, 32);
+
+			Player = PlayerShips.getSprite(0, 1);
+			PlayerUpgraded = PlayerShips.getSprite(0, 0);
+
 			Recon1 = EnemyShips.getSprite(0, 0);
 			Recon2 = EnemyShips.getSprite(1, 0);
 			Recon3 = EnemyShips.getSprite(2, 0);

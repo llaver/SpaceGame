@@ -4,7 +4,6 @@ import com.practice.main.Game;
 import com.practice.main.states.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -33,7 +32,7 @@ public class RandomPath extends GameObject {
 	
 	
 	public RandomPath() {
-		super(0, 0, 0, 0, 0, ObjectID.RandomPath, null);
+		super(0, 0, 0, 0, 0, ObjectID.RandomPath, , null, );
 		
 		this.width = GravityMovementState.width;
 		this.height = GravityMovementState.height;
@@ -47,7 +46,7 @@ public class RandomPath extends GameObject {
 	}
 	
 	public RandomPath(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+		super(x, y, width, height, health, id, , state, );
 		this.width = GravityMovementState.width;
 		this.height = GravityMovementState.height;
 		
@@ -60,7 +59,7 @@ public class RandomPath extends GameObject {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int delta) {
 		
 		int xStepSize = ThreadLocalRandom.current().nextInt(-maxStepLength, maxStepLength + 1);
 		int yStepSize = ThreadLocalRandom.current().nextInt(-maxStepLength, maxStepLength + 1);

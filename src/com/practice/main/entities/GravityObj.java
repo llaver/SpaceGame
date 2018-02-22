@@ -6,7 +6,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.state.BasicGameState;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -22,8 +21,8 @@ public class GravityObj extends GameObject {
 	
 	Handler handler = Game.handler;
 	
-	public GravityObj(float x, float y, float radius, ObjectID id, BasicGameState state) {
-		super(x, y, 2 * radius, 2 * radius, 0, id, state);
+	public GravityObj(float x, float y, float radius, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, 2 * radius, 2 * radius, 0, id, idNum, state);
 		this.x = (int) x;
 		this.y = (int) y;
 		this.rad = (int) radius;
@@ -41,7 +40,7 @@ public class GravityObj extends GameObject {
 	}
 	
 	@Override
-	public void update() {
+	public void update(int delta) {
 		LinkedList<GameObject> objects = handler.getObjects();
 		
 		for(GameObject obj : objects) {

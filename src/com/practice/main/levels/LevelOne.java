@@ -20,9 +20,9 @@ public class LevelOne extends Level {
 		isStarted = true;
 		isRunning = true;
 		
-		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, GameState.gameState));
-		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, GameState.gameState));
-		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, GameState.gameState));
+		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, -1, GameState.gameState));
+		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, -1, GameState.gameState));
+		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, -1, GameState.gameState));
 		
 		
 	}

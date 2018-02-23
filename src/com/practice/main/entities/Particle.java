@@ -20,7 +20,7 @@ public class Particle extends GameObject {
 	private int tracker = 0;
 	
 	public Particle(float x, float y, float velX, float velY, float accelX, float accelY, boolean isAtom, int idNum, int parentIdNum, ObjectID objectID, BasicGameState state) {
-		super(x, y, 6, 6, 100, objectID, , state, );
+		super(x, y, 6, 6, 100, objectID, idNum, state);
 		
 		this.x = x;
 		this.y = y;
@@ -35,8 +35,8 @@ public class Particle extends GameObject {
 		
 	}
 	
-	public Particle(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, , state, );
+	public Particle(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 	}
 	
 	public void updateValues(float x, float y, float velX, float velY, float accelX, float accelY, boolean isAtom) {

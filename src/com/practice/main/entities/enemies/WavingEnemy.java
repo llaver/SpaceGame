@@ -29,8 +29,8 @@ public class WavingEnemy extends Enemy {
 	
 	Image wavingSprite;
 	
-	public WavingEnemy(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+	public WavingEnemy(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		
 		enemy = new Rectangle(x, y, width, height);
 		archSize = r.nextInt(3) + 1;

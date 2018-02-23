@@ -12,8 +12,8 @@ public class PlayerBullet extends PlayerWeapon {
 	Handler handler = Game.handler;
 	Rectangle bullet;
 	
-	public PlayerBullet(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+	public PlayerBullet(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		velX = 0;
 		velY = 1f;
 		
@@ -39,10 +39,6 @@ public class PlayerBullet extends PlayerWeapon {
 	public void render(Graphics g) {
 		g.setColor(Color.white);
 		g.fill(bullet);
-		//x = 
-		//PlayerPosition = {x, y, x + width, y, x + width / 2, y - height};
-		//g.fill(new Polygon(PlayerPosition));
-		
 	}
 	
 	@Override

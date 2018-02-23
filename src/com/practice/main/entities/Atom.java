@@ -27,7 +27,7 @@ public class Atom extends GameObject {
 	private boolean isAtom = true;
 	
 	public Atom(float x, float y, float velX, float velY, float accelX, float accelY, int protonCount, int electronCount, int neutronCount, int idNum, BasicGameState state) {
-		super(x, y, 10, 10, 100, ObjectID.Atom, , state, );
+		super(x, y, 10, 10, 100, ObjectID.Atom, idNum, state);
 		
 		this.x = x;
 		this.y = y;
@@ -56,8 +56,8 @@ public class Atom extends GameObject {
 		
 	}
 	
-	public Atom(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, , state, );
+	public Atom(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 	}
 	
 	public List<Particle> getParticles() {

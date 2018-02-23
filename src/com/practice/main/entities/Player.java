@@ -20,6 +20,7 @@ import com.practice.main.states.GameState;
 public class Player extends GameObject {
 	
 	private float MAXHEALTH = 100;
+	private int FIRE_DELAY = 200;
 	
 	private LinkedList<GameObject> objects;
 	
@@ -31,8 +32,8 @@ public class Player extends GameObject {
 	
 	Input input = Game.input;
 
-	public Player(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, , state, );
+	public Player(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		
 		velX = .5f;
 		velY = .5f;
@@ -76,9 +77,13 @@ public class Player extends GameObject {
 			}
 		}
 		
-		if(input.isKeyPressed(Input.KEY_SPACE)) {
-			handler.addObject(new PlayerBullet((float) (x + width * .2 - 1), Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, GameState.gameState));
-			handler.addObject(new PlayerBullet((float) (x + width * .8 - 1), Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, GameState.gameState));
+		FIRE_DELAY = FIRE_DELAY - delta;
+		if(input.isKeyDown(Input.KEY_SPACE)) {
+			if(FIRE_DELAY <= 0) {
+				handler.addObject(new PlayerBullet((float) (x + width * .2 - 1), Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, -1, GameState.gameState));
+				handler.addObject(new PlayerBullet((float) (x + width * .8 - 1), Util.clamp(80, Game.HEIGHT - 50, y - height), 5, 20, 0, ObjectID.PlayerBullet, -1, GameState.gameState));
+				FIRE_DELAY = 200;
+			}
 		}
 		if(input.isKeyDown(Input.KEY_UP)) {
 			setPos(x, y - velY * delta);
@@ -98,17 +103,8 @@ public class Player extends GameObject {
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.white);
-		//g.fillRect(x, y, width, height);
-		
-		
-		//Assets.Player.draw(x, y, width, height);
-		
 		g.drawImage(player, x, y - height);
-		
-		//g.fill(new Polygon(triangle));
-		
 		system.render(x + width / 2, y);
-		
 	}
 	
 	@Override

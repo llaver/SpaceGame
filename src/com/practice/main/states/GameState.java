@@ -33,7 +33,7 @@ public class GameState extends BasicGameState {
 	public static int LEVELTICKER = 0;
 	public static int CURRENCY = 0;
 
-	Player player = new Player(50, 200, 64, 64, 100, ObjectID.Player, this);
+	Player player = new Player(50, 200, 64, 64, 100, ObjectID.Player, -1, this);
 
 	private LinkedList<GameObject> objects;
 
@@ -120,44 +120,44 @@ public class GameState extends BasicGameState {
 
 		//LEVELS
 		if(level == 1) {
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 50, 50, 100, ObjectID.BasicEnemy, -1, this));
 
 //			handler.addObject(new PathEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, PathEnemy, this));
 //			handler.addObject(new PathEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, PathEnemy, this));
 //			handler.addObject(new PathEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, PathEnemy, this));
 		}
 		if(level == 2) {
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 70, 70, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 70, 70, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 70, 70, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 70, 70, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 70, 70, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 70, 70, 100, ObjectID.BasicEnemy, -1, this));
 		}
 		if(level == 3) {
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 90, 90, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 90, 90, 100,  ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 90, 90, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 90, 90, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 90, 90, 100,  ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 90, 90, 100, ObjectID.BasicEnemy, -1, this));
 		}
 		if(level == 4) {
 			//handler.clearEnemies();
-			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100, ObjectID.WavingEnemy, this));
-			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100, ObjectID.WavingEnemy, this));
-			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100,  ObjectID.WavingEnemy, this));
+			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100, ObjectID.WavingEnemy, -1, this));
+			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100, ObjectID.WavingEnemy, -1, this));
+			handler.addObject(new WavingEnemy(r.nextInt(width - 100), -r.nextInt(30), 20, 20, 100,  ObjectID.WavingEnemy, -1, this));
 		}
 		if(level == 5) {
 			//handler.clearEnemies();
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, -1, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, -1, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, -1, this));
 		}
 		if(level == 6) {
 			//handler.clearEnemies();
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
-			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
-			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, -1, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, -1, this));
+			handler.addObject(new ArchingEnemy(r.nextInt(200), -r.nextInt(30), 20, 20, 100, ObjectID.ArchingEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, -1, this));
+			handler.addObject(new BasicEnemy(r.nextInt(width - 30), -r.nextInt(30), 30, 30, 100, ObjectID.BasicEnemy, -1, this));
 		}
 	}
 

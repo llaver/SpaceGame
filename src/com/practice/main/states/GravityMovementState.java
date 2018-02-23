@@ -85,39 +85,39 @@ public class GravityMovementState extends BasicGameState implements KeyListener 
 		//GravityObj go = new GravityObj(100, 500, 50, ObjectID.GravityObj, this);
 		
 		//Sun
-		StellarBody s1 = new StellarBody(300, 400,(float) 1.98892 * (10*30), 10, 0, ObjectID.StellarBody, this);
+		StellarBody s1 = new StellarBody(300, 400,(float) 1.98892 * (10*30), 10, 0, ObjectID.StellarBody, -1, this);
 		s1.setVelY((float) -.000003);
 		s1.setVelX((float) -.000003);
 		//Earth
-		StellarBody s2 = new StellarBody(350, 70,(float) 5.9742 * (10*24), 5, 0, ObjectID.StellarBody, this);
+		StellarBody s2 = new StellarBody(350, 70,(float) 5.9742 * (10*24), 5, 0, ObjectID.StellarBody, -1, this);
 		s2.setVelY((float) .000001);
 		s2.setVelX((float) .000005);
 		//Black Hole!!!!!!
-		s3 = new StellarBody(350, 300,(float) 5.9742 * (10*200), 30, 0, ObjectID.StellarBody, this);
+		s3 = new StellarBody(350, 300,(float) 5.9742 * (10*200), 30, 0, ObjectID.StellarBody, -1, this);
 		
 		
 		//Sun
-		StellarBody s4 = new StellarBody(2, 678,(float) 1.98892 * (10*12), 10, 0, ObjectID.StellarBody, this);
+		StellarBody s4 = new StellarBody(2, 678,(float) 1.98892 * (10*12), 10, 0, ObjectID.StellarBody, -1, this);
 		s4.setVelY((float) -.000003);
 		s4.setVelX((float) -.000003);
 		//Earth
-		StellarBody s5 = new StellarBody(350, 34,(float) 5.9742 * (10*30), 5, 0, ObjectID.StellarBody, this);
+		StellarBody s5 = new StellarBody(350, 34,(float) 5.9742 * (10*30), 5, 0, ObjectID.StellarBody, -1,  this);
 		s5.setVelY((float) .000001);
 		s5.setVelX((float) .000005);
 		//Sun
-		StellarBody s6 = new StellarBody(300, 400,(float) 1.98892 * (10*35), 10, 0, ObjectID.StellarBody, this);
+		StellarBody s6 = new StellarBody(300, 400,(float) 1.98892 * (10*35), 10, 0, ObjectID.StellarBody, -1, this);
 		s6.setVelY((float) -.000003);
 		s6.setVelX((float) -.000003);
 		//Earth
-		StellarBody s7 = new StellarBody(0, 500,(float) 5.9742 * (10*40), 5, 0, ObjectID.StellarBody, this);
+		StellarBody s7 = new StellarBody(0, 500,(float) 5.9742 * (10*40), 5, 0, ObjectID.StellarBody, -1, this);
 		s7.setVelY((float) .000001);
 		s7.setVelX((float) .000005);
 		//Sun
-		StellarBody s8 = new StellarBody(100, 700,(float) 1.98892 * (10*25), 10, 0, ObjectID.StellarBody, this);
+		StellarBody s8 = new StellarBody(100, 700,(float) 1.98892 * (10*25), 10, 0, ObjectID.StellarBody, -1, this);
 		s8.setVelY((float) -.000003);
 		s8.setVelX((float) -.000003);
 		//Earth
-		StellarBody s9 = new StellarBody(500, 500,(float) 5.9742 * (10*29), 5, 0, ObjectID.StellarBody, this);
+		StellarBody s9 = new StellarBody(500, 500,(float) 5.9742 * (10*29), 5, 0, ObjectID.StellarBody, -1, this);
 		s9.setVelY((float) .000001);
 		s9.setVelX((float) .000005);
 		

@@ -22,8 +22,8 @@ public class StellarBody extends GameObject {
 	private Handler handler = Game.handler;
 	private Random r = new Random();
 	
-	public StellarBody(float px, float py, float m, float r, float health, ObjectID id, BasicGameState state) {
-		super(px , py, 2*r, 2*r, health, id, , state, );
+	public StellarBody(float px, float py, float m, float r, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(px , py, 2*r, 2*r, health, id, idNum, state);
 		mass = m;
 		radius = m / 100;
 		

@@ -32,7 +32,7 @@ public class RandomPath extends GameObject {
 	
 	
 	public RandomPath() {
-		super(0, 0, 0, 0, 0, ObjectID.RandomPath, , null, );
+		super(0, 0, 0, 0, 0, ObjectID.RandomPath, -1, null);
 		
 		this.width = GravityMovementState.width;
 		this.height = GravityMovementState.height;
@@ -45,8 +45,8 @@ public class RandomPath extends GameObject {
 		points.add(new Point((int) this.x, (int) this.y, Color.white));
 	}
 	
-	public RandomPath(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, , state, );
+	public RandomPath(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		this.width = GravityMovementState.width;
 		this.height = GravityMovementState.height;
 		

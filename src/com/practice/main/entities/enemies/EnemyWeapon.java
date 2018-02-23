@@ -10,8 +10,8 @@ public abstract class EnemyWeapon extends Enemy {
 	public int weaponLevel = 1;
 	
 
-	public EnemyWeapon(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+	public EnemyWeapon(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 	}
 	public int getWeaponLevel() {
 		return weaponLevel;

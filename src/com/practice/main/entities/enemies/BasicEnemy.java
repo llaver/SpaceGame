@@ -26,8 +26,8 @@ public class BasicEnemy extends Enemy {
 	
 	Image basicEnemy;
 	
-	public BasicEnemy(float x, float y, float width, float height,float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+	public BasicEnemy(float x, float y, float width, float height,float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		
 		enemy = new Rectangle(x, y, width, height);
 		basicEnemy = Assets.Recon1.getScaledCopy( (int) width, (int) height).getFlippedCopy(true, true);

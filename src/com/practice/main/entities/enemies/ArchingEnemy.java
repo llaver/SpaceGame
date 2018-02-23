@@ -28,8 +28,8 @@ public class ArchingEnemy extends Enemy {
 	
 	Image archingSprite;
 	
-	public ArchingEnemy(float x, float y, float width, float height, float health, ObjectID id, BasicGameState state) {
-		super(x, y, width, height, health, id, state);
+	public ArchingEnemy(float x, float y, float width, float height, float health, ObjectID id, int idNum, BasicGameState state) {
+		super(x, y, width, height, health, id, idNum, state);
 		
 		enemy = new Rectangle(x, y, width, height);
 		archSize = r.nextInt(15) + 1;

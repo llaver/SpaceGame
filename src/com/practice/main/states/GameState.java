@@ -3,6 +3,7 @@ package com.practice.main.states;
 import java.util.LinkedList;
 import java.util.Random;
 
+import com.practice.main.Assets;
 import com.practice.main.entities.*;
 import com.practice.main.entities.enemies.*;
 import org.newdawn.slick.Color;
@@ -10,6 +11,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -45,6 +48,8 @@ public class GameState extends BasicGameState {
 	
 	public static GameState gameState;
 
+	private Audio Theme;
+
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -54,6 +59,10 @@ public class GameState extends BasicGameState {
 		width = container.getWidth();
 		height = container.getHeight();
 		handler.addObject(player);
+
+		Theme = Assets.Theme;
+
+		Theme.playAsMusic(1.0f, 1.0f, true);
 
 	}
 
@@ -79,6 +88,7 @@ public class GameState extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+
 		DELTA = delta;
 
 		handler = Game.handler;
@@ -109,6 +119,7 @@ public class GameState extends BasicGameState {
 		}
 
 
+		SoundStore.get().poll(0);
 
 	}
 

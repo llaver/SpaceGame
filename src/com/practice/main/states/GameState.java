@@ -4,8 +4,10 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import com.practice.main.Assets;
+import com.practice.main.LevelManager;
 import com.practice.main.entities.*;
 import com.practice.main.entities.enemies.*;
+import org.lwjgl.util.Timer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -36,7 +38,7 @@ public class GameState extends BasicGameState {
 	public static int LEVELTICKER = 0;
 	public static int CURRENCY = 0;
 
-	Player player = new Player(50, 200, 64, 64, 100, ObjectID.Player, -1, this);
+	Player player;
 
 	private LinkedList<GameObject> objects;
 
@@ -49,6 +51,8 @@ public class GameState extends BasicGameState {
 	public static GameState gameState;
 
 	private Audio Theme;
+	
+	LevelManager levelManager = new LevelManager();
 
 
 	@Override
@@ -58,6 +62,9 @@ public class GameState extends BasicGameState {
 		input = container.getInput();
 		width = container.getWidth();
 		height = container.getHeight();
+		
+		player = new Player(width / 2, height - 200, 64, 64, 100, ObjectID.Player, -1, this);
+		
 		handler.addObject(player);
 
 		Theme = Assets.Theme;
@@ -88,6 +95,8 @@ public class GameState extends BasicGameState {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		
+		Timer.tick();
 
 		DELTA = delta;
 
@@ -105,7 +114,7 @@ public class GameState extends BasicGameState {
 		}
 
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
-			game.enterState(2);
+			game.enterState(State.PAUSE);
 		}
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
 		}
@@ -202,7 +211,7 @@ public class GameState extends BasicGameState {
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 1;
+		return State.GAME;
 	}
 
 }

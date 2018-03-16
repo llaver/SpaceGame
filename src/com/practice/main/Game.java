@@ -39,6 +39,7 @@ public class Game extends StateBasedGame {
 		this.addState(new MenuState());
 		this.addState(new GameState());
 		this.addState(new PauseState());
+		//this.addState(new LinesState());
 		//this.addState(new RandomMovementState());
 		//this.addState(new TestState());
 		//this.addState(new SpirographState());

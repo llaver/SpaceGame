@@ -43,7 +43,7 @@ public class Player extends GameObject {
 	}
 	
 	private void init() {
-		player = Assets.Player.getScaledCopy((int) width, (int) height);
+		player = Assets.PlayerShip.getScaledCopy((int) width, (int) height);
 		try {
 			image = new Image("res/img/particles/particle.png", false);
 			system = new ParticleSystem(image,1500);

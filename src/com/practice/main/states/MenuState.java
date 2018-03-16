@@ -90,7 +90,7 @@ public class MenuState extends BasicGameState {
 
 					if(input.getMouseY() <= 375 && input.getMouseY() >= 300) {
 						//play game
-						game.enterState(1);
+						game.enterState(State.GAME);
 					} else if(input.getMouseY() <= 475 && input.getMouseY() >= 400) {
 						//help
 						isHelp = true;
@@ -125,7 +125,7 @@ public class MenuState extends BasicGameState {
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 0;
+		return State.MENU;
 	}
 
 }

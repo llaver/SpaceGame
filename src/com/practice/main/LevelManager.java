@@ -10,7 +10,7 @@ public class LevelManager {
 	
 	private List<Level> levels;
 	
-	Level tempLevel;
+	private Level tempLevel;
 	
 	public LevelManager() {
 		levels = new ArrayList<>();

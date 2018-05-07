@@ -117,7 +117,7 @@ public class Assets {
 			ButtonQuit = new Image("res/img/GUI/buttons/Quit.png");
 
 			//Lives
-			TitleImage = new Image("res/img/GUI/lives/Lives.png");
+			Lives = new Image("res/img/GUI/lives/Lives.png");
 			
 			//Title Image
 			TitleImage = new Image("res/img/GUI/title/StellaViatoremTitle.png");
